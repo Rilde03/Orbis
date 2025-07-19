@@ -1,0 +1,21 @@
+{
+  "ultima_actualizacion": "$(date +'%Y-%m-%d %H:%M')",
+  "tematicas": {
+    "general": {
+      "titulo": "Bienvenida General",
+      "archivo": "tematicas/general.json"
+    },
+    "escuela_sabatica": {
+      "titulo": "Escuela Sabática",
+      "archivo": "tematicas/escuela_sabatica.json"
+    },
+    "jovenes": {
+      "titulo": "Sociedad de Jóvenes",
+      "archivo": "tematicas/jovenes.json"
+    },
+    "13sabado": {
+      "titulo": "13er Sábado",
+      "archivo": "tematicas/13sabado.json"
+    }
+  }
+}
