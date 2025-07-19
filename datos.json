@@ -1,10 +1,9 @@
-{
-  "ultima_actualizacion": "$(date +'%Y-%m-%d')",
-  "tematicas": {
-    "culto_divino": {
-      "titulo": "Culto Divino",
+git add datos.json{ "ultima_actualizacion": "$(date 
+  +'%Y-%m-%d')", "tematicas": {
+git commit -m "Actualización de bienvenidas" 
+      "culto_divino": { "titulo": "Culto Divino", 
       "versiculo": {
-        "texto": "Venid, adoremos y postrémonos",
+git push origin main        "texto": "Venid, adoremos y postrémonos",
         "referencia": "Salmos 95:6"
       },
       "contenido": "Bienvenidos hermanos a este servicio de adoración...",
