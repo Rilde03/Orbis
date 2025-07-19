@@ -1,22 +1,20 @@
-#!/data/data/com.termux/files/usr/bin/bash
+#!/bin/bash
 
 # Configuración
 REPO_DIR="$HOME/Orbis"
-GITHUB_USER="Rilde03"
-GITHUB_REPO="Orbis"
-GITHUB_BRANCH="main"
-COMMIT_MSG="Actualización automática desde Termux"
+GIT_REPO="https://github.com/Rilde03/Orbis.git"
 
-# Actualizar contenido
-cd $REPO_DIR
+# Ir al directorio del repositorio
+cd "$REPO_DIR" || exit
 
-# Agregar todos los cambios
-git add -A
+# Actualizar desde GitHub
+git pull origin main
 
-# Hacer commit
-git commit -m "$COMMIT_MSG"
+# Hacer commit de cualquier cambio local
+git add .
+git commit -m "Actualización automática desde Termux - $(date +'%Y-%m-%d %H:%M:%S')"
 
 # Subir cambios
-git push https://${GITHUB_USER}@github.com/${GITHUB_USER}/${GITHUB_REPO}.git ${GITHUB_BRANCH}
+git push origin main
 
-echo "Contenido actualizado correctamente en GitHub Pages"
+echo "✅ Actualización completada - $(date +'%Y-%m-%d %H:%M:%S')"
