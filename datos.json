@@ -1,4 +1,78 @@
 {
+    "ultima_actualizacion": "2023-11-15",
+    "tematicas": {
+        "culto_divino": {
+            "titulo": "Culto Divino",
+            "descripcion": "Bienvenidas para el servicio principal",
+            "versiculo": {
+                "texto": "Venid, adoremos y postrémonos",
+                "referencia": "Salmos 95:6"
+            },
+            "contenido": "Bienvenidos hermanos y hermanas en Cristo a este servicio de adoración. Hoy nos reunimos como familia de fe para exaltar el nombre de nuestro Salvador. Que nuestros corazones se unan en alabanza y nuestra mente se enfoque en la Palabra que nos transforma.",
+            "poema": "Hoy nos reunimos con alegría\npara alabar al Dios de vida\nen comunión y armonía\nnuestra fe está fortalecida\n\nCon voces unidas cantaremos\nal que en la cruz nos redimió\ny en espíritu adoraremos\nal que por siempre nos amó"
+        },
+        "escuela_sabatica": {
+            "titulo": "Escuela Sabática",
+            "descripcion": "Material para el estudio bíblico",
+            "versiculo": {
+                "texto": "Escudriñad las Escrituras",
+                "referencia": "Juan 5:39"
+            },
+            "contenido": "Bienvenidos al estudio de la Palabra de Dios en este día. La Escuela Sabática es nuestro espacio para crecer en conocimiento y gracia, donde juntos descubrimos los tesoros escondidos en las Sagradas Escrituras. Que el Espíritu Santo nos guíe a toda verdad.",
+            "poema": "La Biblia es luz, es pan, es vida\nmanantial de verdad sin igual\nen sus páginas hallamos guía\npara llegar al hogar celestial"
+        },
+        "sociedad_de_jovenes": {
+            "titulo": "Sociedad de Jóvenes",
+            "descripcion": "Encuentro juvenil de fe y comunión",
+            "versiculo": {
+                "texto": "Nadie tenga en poco tu juventud",
+                "referencia": "1 Timoteo 4:12"
+            },
+            "contenido": "¡Bienvenidos jóvenes guerreros de la fe! Este es su espacio para crecer, compartir y fortalecerse mutuamente. Que este encuentro avive el fuego de su pasión por Cristo y los anime a ser luz en su generación.",
+            "poema": "Juventud consagrada a Dios\ncon propósito y visión\nllevando alto su estandarte\ncon valor y convicción\n\nEl mundo necesita ver\njóvenes de integridad\nque vivan para el Señor\ncon fiel sinceridad"
+        },
+        "ministerio_de_mujeres": {
+            "titulo": "Ministerio de Mujeres",
+            "descripcion": "Espacio para el crecimiento espiritual femenino",
+            "versiculo": {
+                "texto": "La mujer sabia edifica su casa",
+                "referencia": "Proverbios 14:1"
+            },
+            "contenido": "Bienvenidas hermanas a este tiempo de comunión y aprendizaje. Que juntas descubramos el poder transformador de Dios en nuestras vidas y seamos instrumentos de bendición en nuestros hogares y comunidades.",
+            "poema": "Mujer virtuosa, corona es\nde gracia y sabiduría\nen tus manos hay poder\npara cambiar cada día\n\nTu influencia trasciende\ncomo luz que nunca cesa\neres obra maestra\nde la divina promesa"
+        },
+        "culto_de_oracion": {
+            "titulo": "Culto de Oración",
+            "descripcion": "Encuentro de intercesión y comunión con Dios",
+            "versiculo": {
+                "texto": "Orad sin cesar",
+                "referencia": "1 Tesalonicenses 5:17"
+            },
+            "contenido": "Bienvenidos a este sagrado espacio de oración. Aquí nos presentamos ante el trono de la gracia para derramar nuestros corazones, interceder por otros y experimentar el poder transformador de la comunión con nuestro Padre celestial.",
+            "poema": "La oración es dulce aroma\nque sube al trono celestial\nes el susurro del alma\nen diálogo vertical\n\nNo hay distancia que la impida\nni noche que la detenga\nes el cable que nos une\na la fuente de la fuerza"
+        },
+        "escuela_cristiana": {
+            "titulo": "Escuela Cristiana",
+            "descripcion": "Educación basada en principios bíblicos",
+            "versiculo": {
+                "texto": "Instruye al niño en su camino",
+                "referencia": "Proverbios 22:6"
+            },
+            "contenido": "Bienvenidos a este espacio donde la fe y el conocimiento se entrelazan para formar carácter cristiano. Que cada lección nos acerque más a Dios y nos prepare para ser luz en el mundo.",
+            "poema": "Semillas de verdad sembramos\nen tiernos corazones\nconfiando que algún día\ndarán buenos frutos\n\nCon paciencia y dedicación\nmoldeamos el mañana\nformando generaciones\nque honren a Dios con su alma"
+        },
+        "ministerio_de_hombres": {
+            "titulo": "Ministerio de Hombres",
+            "descripcion": "Espacio para el crecimiento espiritual masculino",
+            "versiculo": {
+                "texto": "Esforzaos y cobrad ánimo",
+                "referencia": "Josué 1:9"
+            },
+            "contenido": "Bienvenidos hermanos a este encuentro donde fortalecemos nuestro compromiso como hombres de Dios. Que juntos aprendamos a ser líderes espirituales en nuestros hogares, iglesia y comunidad, siguiendo el ejemplo de Cristo.",
+            "poema": "Varón de Dios, levántate\ncon valor y decisión\nsé ejemplo en palabra\ny en santa conducta\n\nProtector, guía y sostén\ncomo roca firme sé\nque en tus pasos otros ven\ncómo a Cristo seguiré"
+        }
+    }
+}{
     "ultima_actualizacion": "2025-7-19",
     "tematicas": {
         "culto_divino": {
