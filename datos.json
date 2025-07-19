@@ -17,6 +17,22 @@
         "referencia": "Juan 5:39"
       },
       "contenido": "Bienvenidos al estudio de la Palabra de Dios..."
+    },
+    "jovenes": {
+      "titulo": "Sociedad de Jóvenes",
+      "versiculo": {
+        "texto": "Ninguno tenga en poco tu juventud",
+        "referencia": "1 Timoteo 4:12"
+      },
+      "contenido": "Bienvenidos jóvenes a este encuentro..."
+    },
+    "13sabado": {
+      "titulo": "Décimo Tercer Sábado",
+      "versiculo": {
+        "texto": "Traed todos los diezmos al alfolí",
+        "referencia": "Malaquías 3:10"
+      },
+      "contenido": "Bienvenidos a este servicio especial..."
     }
   }
 }
