@@ -1,0 +1,22 @@
+{
+  "ultima_actualizacion": "$(date +'%Y-%m-%d')",
+  "tematicas": {
+    "culto_divino": {
+      "titulo": "Culto Divino",
+      "versiculo": {
+        "texto": "Venid, adoremos y postrémonos",
+        "referencia": "Salmos 95:6"
+      },
+      "contenido": "Bienvenidos hermanos a este servicio de adoración...",
+      "poema": "Hoy es día de bendición\nde alabanza y oración..."
+    },
+    "escuela_sabatica": {
+      "titulo": "Escuela Sabática",
+      "versiculo": {
+        "texto": "Escudriñad las Escrituras",
+        "referencia": "Juan 5:39"
+      },
+      "contenido": "Bienvenidos al estudio de la Palabra de Dios..."
+    }
+  }
+}
