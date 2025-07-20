@@ -1,0 +1,174 @@
+{
+    "ultima_actualizacion": "2025-07-19",
+    "tematicas": {
+        "culto_divino": {
+            "titulo": "Culto Divino",
+            "descripcion": "Bienvenidas para el servicio principal",
+            "versiculo": {
+                "texto": "Venid, adoremos y postrémonos",
+                "referencia": "Salmos 95:6"
+            },
+            "contenido": [
+                "Bienvenidos hermanos y hermanas en Cristo a este servicio de adoración. Hoy nos congregamos como un solo cuerpo para exaltar el nombre de nuestro Salvador. Que este tiempo de comunión espiritual nos fortalezca en la fe y nos una más estrechamente como familia de Dios.\n\nEn medio de un mundo lleno de afanes, hemos sido llamados a apartar este momento sagrado para contemplar la grandeza de nuestro Creador. Dejemos atrás las preocupaciones y enfoquemos nuestros corazones en la alabanza.",
+                "📖📖📖📖📖📖📖📖📖📖",
+                "Bienvenidos a esta celebración donde Cristo es el centro de nuestra adoración. En este día especial, alzamos nuestras voces en armonía para glorificar al Rey de reyes. Que cada canto, cada oración y cada mensaje nos acerque más a la presencia divina.\n\nEn un mundo que necesita desesperadamente esperanza, nosotros somos portadores de la luz de Cristo. Que este culto nos renueve y nos impulse a ser testigos fieles del amor de Dios.",
+                "📖📖📖📖📖📖📖📖📖📖",
+                "Reciban una cordial bienvenida a este encuentro con lo eterno. Hoy dejamos atrás lo temporal para conectarnos con el Dios inmutable. En la belleza de su santidad, encontramos refugio, paz y propósito.\n\nQue este servicio no sea simplemente una rutina religiosa, sino un encuentro transformador con el Viviente. Abramos nuestros corazones para recibir lo que el Espíritu quiere hablarnos en este día."
+            ],
+            "poema": "Hoy nos reunimos con alegría\npara alabar al Dios de vida\nen comunión y armonía\nnuestra fe está fortalecida\n\nCantemos con devoción\nlevántense todas las voces\nen sincera adoración\nque el Espíritu nos conduzca"
+        },
+        "escuela_sabatica": {
+            "titulo": "Escuela Sabática",
+            "descripcion": "Material para el estudio bíblico",
+            "versiculo": {
+                "texto": "Escudriñad las Escrituras",
+                "referencia": "Juan 5:39"
+            },
+            "contenido": [
+                "Bienvenidos al estudio de la Palabra de Dios en este día. La Escuela Sabática es el momento propicio para profundizar en las verdades eternas que transforman vidas. Hoy exploraremos juntos las riquezas de la Biblia, ese tesoro inagotable que ilumina nuestro camino.\n\nQue este estudio no sea solo intelectual, sino que permitamos que la verdad penetre en nuestros corazones y produzca frutos de justicia. Dispongamos nuestros entendimientos para recibir la instrucción divina.",
+                "📖📖📖📖📖📖📖📖📖📖",
+                "Bienvenidos a este espacio donde la Palabra cobra vida. Cada sábado tenemos el privilegio de escudriñar las Escrituras juntos, descubriendo cómo sus verdades eternas se aplican a nuestra vida cotidiana.\n\nHoy nos sumergiremos en el texto bíblico con mentes abiertas y corazones dispuestos. Que el Espíritu Santo sea nuestro maestro guiándonos a toda verdad.",
+                "📖📖📖📖📖📖📖📖📖📖",
+                "Reciban una afectuosa bienvenida a este estudio bíblico. En un mundo de opiniones cambiantes, la Biblia permanece como nuestra brújula infalible. Cada lección es una oportunidad para conocer mejor el carácter de Dios y su plan para nosotros.\n\nA medida que estudiamos, recordemos que el conocimiento bíblico debe llevarnos a una relación más profunda con Cristo y a un servicio más dedicado a los demás."
+            ],
+            "poema": "La Biblia es nuestra guía\nlámpara es a nuestro pie\nen sus páginas hallamos\nla verdad que nos hace libres\n\nEstudiemos con fervor\ncada precepto, cada línea\nque el Espíritu de amor\nnos revele su doctrina"
+        },
+        "sociedad_de_jovenes": {
+            "titulo": "Sociedad de Jóvenes",
+            "descripcion": "Bienvenidas para el encuentro juvenil",
+            "versiculo": {
+                "texto": "Ninguno tenga en poco tu juventud",
+                "referencia": "1 Timoteo 4:12"
+            },
+            "contenido": [
+                "¡Bienvenidos jóvenes guerreros de la fe! Hoy nos reunimos como generación consagrada que vive para glorificar a Dios. En un mundo que intenta seducirnos con sus placeres, nosotros alzamos la bandera de Cristo.\n\nEste es tu espacio, este es tu momento para crecer, compartir y fortalecerte con otros que, como tú, han decidido seguir a Jesús sin importar lo que diga el mundo. ¡Prepárate para ser inspirado y desafiado en tu caminar con Dios!",
+                "📖📖📖📖📖📖📖📖📖📖",
+                "¡Bienvenidos a este encuentro donde la fe joven se fortalece! Ustedes no son el futuro de la iglesia, son el presente activo de Dios. Hoy compartiremos experiencias, risas y momentos profundos que nos acercarán más a Cristo.\n\nEn una cultura que promueve valores contrarios al evangelio, nosotros elegimos vivir diferente. Que este tiempo juntos renueve nuestro compromiso de ser luz en las tinieblas.",
+                "📖📖📖📖📖📖📖📖📖📖",
+                "¡Hola jóvenes adventistas! Bienvenidos a este espacio creado especialmente para ustedes. Sabemos que enfrentan desafíos únicos, pero también tienen un potencial increíble para impactar este mundo para Cristo.\n\nHoy no seremos espectadores, sino participantes activos en nuestra fe. Prepárense para conectar, crecer y ser desafiados a vivir un cristianismo auténtico y relevante."
+            ],
+            "poema": "Juventud consagrada\nllena de vigor y luz\ncon la fe bien cimentada\nen la roca que es Jesús\n\nSomos llama que avanza\nsomos sal y somos luz\nllevando la esperanza\nde la eterna cruz"
+        },
+        "ministerio_de_mujeres": {
+            "titulo": "Ministerio de Mujeres",
+            "descripcion": "Bienvenidas para el grupo femenino",
+            "versiculo": {
+                "texto": "La mujer sabia edifica su casa",
+                "referencia": "Proverbios 14:1"
+            },
+            "contenido": [
+                "Bienvenidas queridas hermanas a este encuentro especial donde juntas creceremos en gracia y sabiduría. Como hijas del Rey, tenemos un llamado singular a reflejar el carácter de Cristo en nuestros hogares, iglesia y comunidad.\n\nHoy compartiremos experiencias, oraremos unas por otras y nos fortaleceremos mutuamente en este hermoso camino de fe. Que este tiempo sea de edificación espiritual y profunda comunión.",
+                "📖📖📖📖📖📖📖📖📖📖",
+                "Reciban una cálida bienvenida todas las mujeres que hoy se reúnen en el nombre de Jesús. En un mundo que a menudo nos juzga por nuestra apariencia, Dios valora nuestro corazón y nuestro servicio.\n\nEste es un espacio seguro donde podemos ser auténticas, compartir nuestras luchas y celebrar nuestras victorias. Juntas descubriremos cómo Dios nos equipa para cumplir nuestros diversos roles con excelencia y amor.",
+                "📖📖📖📖📖📖📖📖📖📖",
+                "Bienvenidas valientes mujeres de Dios a este tiempo de compañerismo espiritual. Como la mujer virtuosa de Proverbios 31, cada una de ustedes tiene dones únicos que edifican a su familia y a la iglesia.\n\nHoy nos enfocaremos en cómo desarrollar esos dones para la gloria de Dios. Prepárense para ser inspiradas, animadas y desafiadas a crecer en su relación con Cristo."
+            ],
+            "poema": "Mujeres virtuosas\ncon propósito y valor\nsus vidas fructíferas\nhonran al Señor\n\nCon manos que sirven\ny corazones que oran\nen la fe se mantienen\nmientras el mundo pasará"
+        },
+        "culto_de_oracion": {
+            "titulo": "Culto de Oración",
+            "descripcion": "Bienvenidas para el encuentro de intercesión",
+            "versiculo": {
+                "texto": "Orad sin cesar",
+                "referencia": "1 Tesalonicenses 5:17"
+            },
+            "contenido": [
+                "Bienvenidos a este sagrado espacio de comunión con el Cielo. Hoy nos reunimos para presentar nuestras súplicas ante el trono de la gracia, conscientes de que nuestro Dios escucha y responde.\n\nLa oración es el aliento del alma, el vínculo que nos une a nuestro Padre celestial. Vengamos con corazones humildes y expectantes, seguros de que el Espíritu Santo intercede por nosotros con gemidos indecibles.",
+                "📖📖📖📖📖📖📖📖📖📖",
+                "Bienvenidos al lugar donde lo imposible se hace posible. En este culto de oración, experimentaremos el poder transformador de comunicarnos con el Creador del universo.\n\nNo estamos aquí solo para recitar palabras, sino para conectarnos con el corazón de Dios. Que este tiempo de intercesión fortalezca nuestra fe y nos una como cuerpo de Cristo.",
+                "📖📖📖📖📖📖📖📖📖📖",
+                "Reciban una cordial bienvenida a este encuentro de oración. La oración es nuestra arma más poderosa, nuestro privilegio más grande y nuestra conexión vital con el cielo.\n\nHoy levantaremos juntos nuestras voces en súplica, acción de gracias y adoración. Prepárense para experimentar la presencia de Dios de una manera especial mientras nos acercamos confiadamente a su trono de gracia."
+            ],
+            "poema": "La oración es poder\nes el alma que clama\nes el dulce deber\nde quien a Dios ama\n\nSuben nuestras plegarias\ncomo incienso de amor\nresponden las misericordias\ndel fiel Creador"
+        },
+        "escuela_cristiana": {
+            "titulo": "Escuela Cristiana",
+            "descripcion": "Bienvenidas para el programa educativo",
+            "versiculo": {
+                "texto": "Instruye al niño en su camino",
+                "referencia": "Proverbios 22:6"
+            },
+            "contenido": [
+                "Bienvenidos estudiantes, maestros y padres a este espacio donde la fe y el conocimiento se entrelazan. En nuestra escuela cristiana buscamos no solo desarrollar mentes brillantes, sino formar caracteres semejantes al de Cristo.\n\nCada lección, cada actividad está impregnada del propósito de glorificar a Dios. Que este sea un día de aprendizaje significativo, donde descubramos más de las maravillas de la creación divina.",
+                "📖📖📖📖📖📖📖📖📖📖",
+                "Bienvenidos a este lugar donde la excelencia académica y los valores cristianos van de la mano. Hoy tenemos la oportunidad de aprender no solo conceptos, sino principios eternos que guiarán nuestras vidas.\n\nA los estudiantes: ustedes son amados y creados con un propósito único. A los maestros: su labor es sagrada al moldear vidas. Juntos formamos una comunidad de aprendizaje centrada en Cristo.",
+                "📖📖📖📖📖📖📖📖📖📖",
+                "Reciban una afectuosa bienvenida a nuestra escuela cristiana. Aquí no solo llenamos mentes de conocimiento, sino que formamos corazones para servir a Dios y al prójimo.\n\nEn un mundo que necesita desesperadamente luz, estamos preparando a la próxima generación para ser portadores de esa luz. Que este día de clases esté lleno de descubrimientos, crecimiento y bendición."
+            ],
+            "poema": "En esta casa de saber\ndonde Cristo es el Maestro\nvamos juntos a crecer\nen conocimiento y carácter\n\nCada lección, cada verdad\nnos acerca al Creador\nformando con integridad\nsiervos de gran valor"
+        },
+        "ministerio_de_hombres": {
+            "titulo": "Ministerio de Hombres",
+            "descripcion": "Bienvenidas para el grupo varonil",
+            "versiculo": {
+                "texto": "Esforzaos y cobrad ánimo",
+                "referencia": "Josué 1:9"
+            },
+            "contenido": [
+                "Bienvenidos hermanos a este encuentro de varones de Dios. Hoy nos reunimos como guerreros espirituales, llamados a ser pilares en nuestras familias, iglesia y sociedad. El mundo necesita hombres íntegros que vivan con convicción y valentía su fe.\n\nEste es un espacio para fortalecernos, rendir cuentas y animarnos unos a otros en el camino de la santidad. Que salgamos de aquí más comprometidos con el llamado divino.",
+                "📖📖📖📖📖📖📖📖📖📖",
+                "Bienvenidos a este círculo de hombres que buscan seguir a Cristo sin reservas. En una cultura que a menudo distorsiona la verdadera masculinidad, nosotros elegimos el modelo de Jesús: fuerte y tierno, valiente y compasivo.\n\nHoy compartiremos desafíos, oraremos juntos y nos animaremos a ser los líderes espirituales que nuestras familias y comunidades necesitan. Prepárense para ser desafiados y equipados.",
+                "📖📖📖📖📖📖📖📖📖📖",
+                "Reciban una cordial bienvenida todos los hombres que hoy se reúnen en el nombre de Cristo. Ustedes no están aquí por casualidad; Dios los ha llamado para ser agentes de cambio en este tiempo.\n\nEn este espacio seguro podemos ser auténticos, compartir nuestras luchas y celebrar nuestras victorias. Juntos descubriremos cómo vivir nuestra fe de manera práctica y poderosa en el hogar, el trabajo y la comunidad."
+            ],
+            "poema": "Hombres de valor\nfirmes en la verdad\ncon santo fervor\nguardando integridad\n\nCaballeros de Cristo\nsoldados de la luz\nque en el mundo han visto\nla graza de Jesús"
+        },
+        "sociedad_de_infantiles": {
+            "titulo": "Sociedad de Infantiles",
+            "descripcion": "Bienvenidas para los niños",
+            "versiculo": {
+                "texto": "Dejad a los niños venir a mí",
+                "referencia": "Marcos 10:14"
+            },
+            "contenido": [
+                "¡Bienvenidos pequeños héroes de la fe! Hoy tenemos un programa especial lleno de canciones, historias y diversión mientras aprendemos más de Jesús. Cada uno de ustedes es especial para Dios y Él tiene grandes planes para sus vidas.\n\nPrepárense para cantar, reír y descubrir las maravillosas verdades de la Biblia. ¡Dios les ama mucho y nosotros también!",
+                "📖📖📖📖📖📖📖📖📖📖",
+                "¡Hola niños y niñas! Bienvenidos a este tiempo increíble donde aprenderemos juntos sobre el amor de Dios. Hoy tenemos historias emocionantes, juegos divertidos y canciones alegres que nos ayudarán a conocer más a Jesús.\n\nUstedes son importantes para Dios y para nosotros. Prepárense para una aventura emocionante en la fe mientras descubrimos cómo Dios nos ama y tiene un plan especial para cada uno.",
+                "📖📖📖📖📖📖📖📖📖📖",
+                "¡Bienvenidos pequeños gigantes del reino! Hoy es un día especial porque estamos aquí para aprender, jugar y adorar juntos. Dios los ama tal como son y tiene cosas maravillosas preparadas para ustedes.\n\nA través de actividades divertidas y enseñanzas creativas, descubriremos cómo podemos seguir a Jesús cada día. ¡Prepárense para pasar un tiempo fantástico en la casa de Dios!"
+            ],
+            "poema": "Pequeños corazones\npuros como la luz\nson bendiciones\nque vienen de Jesús\n\nCon canciones y risas\ny manos que oran\ncrecen las sonrisas\nque el amor sembrará"
+        },
+        "culto_de_sanidad": {
+            "titulo": "Culto de Sanidad",
+            "descripcion": "Bienvenidas para el servicio de sanidad",
+            "versiculo": {
+                "texto": "Yo soy Jehová tu sanador",
+                "referencia": "Éxodo 15:26"
+            },
+            "contenido": [
+                "Bienvenidos a este servicio especial donde confiamos en el poder sanador de nuestro Dios. Él conoce cada dolor, cada enfermedad, cada herida del alma. Hoy venimos con fe, sabiendo que el mismo Jesús que sanó en los días bíblicos sigue obrando milagros hoy.\n\nPresentemos delante del Señor nuestras necesidades físicas, emocionales y espirituales, confiados en su amor y misericordia infinita.",
+                "📖📖📖📖📖📖📖📖📖📖",
+                "Bienvenidos a este encuentro donde la fe y la sanidad divina se encuentran. Dios sigue siendo el mismo ayer, hoy y siempre, y su poder para sanar no ha disminuido.\n\nHoy levantaremos nuestras peticiones ante el Gran Médico, sabiendo que Él escucha y responde según su perfecta voluntad. Vengan con expectativa, porque nuestro Dios sigue haciendo maravillas.",
+                "📖📖📖📖📖📖📖📖📖📖",
+                "Reciban una cálida bienvenida a este servicio de sanidad. En un mundo lleno de dolor y enfermedad, tenemos la seguridad de que nuestro Dios es poderoso para sanar, restaurar y renovar.\n\nHoy nos acercamos confiadamente al trono de la gracia, presentando nuestras necesidades de sanidad física, emocional y espiritual. Que este sea un tiempo de fe renovada y encuentros transformadores con el poder sanador de Cristo."
+            ],
+            "poema": "Hay poder en el nombre\nque todo mal sana\nhay divino perfume\nque toda pena calma\n\nCristo el gran Médico\nalivia el dolor\nsu toque es místico\nlleno de amor"
+        },
+        "estudio_biblico": {
+            "titulo": "Estudio Bíblico",
+            "descripcion": "Bienvenidas para el estudio profundo",
+            "versiculo": {
+                "texto": "Lámpara es a mis pies tu palabra",
+                "referencia": "Salmos 119:105"
+            },
+            "contenido": [
+                "Bienvenidos a este tiempo de excavación espiritual en las minas de oro de la Palabra de Dios. Hoy nos sumergiremos en las profundidades de las Escrituras para extraer preciosas verdades que transformarán nuestras vidas.\n\nQue este estudio no sea solo académico, sino una experiencia viva con el Autor de la Biblia. Permítamos que el Espíritu Santo nos hable directamente a través de su Palabra eterna.",
+                "📖📖📖📖📖📖📖📖📖📖",
+                "Bienvenidos a este banquete espiritual donde la Palabra de Dios es nuestro alimento. Cada versículo, cada historia, cada enseñanza contiene nutrientes esenciales para nuestro crecimiento cristiano.\n\nHoy no seremos meros espectadores, sino participantes activos en el descubrimiento de las verdades bíblicas. Prepárense para que la Escritura cobre vida ante sus ojos y transforme sus corazones.",
+                "📖📖📖📖📖📖📖📖📖📖",
+                "Reciban una cordial bienvenida a este estudio bíblico. En un mundo de opiniones cambiantes, la Biblia permanece como nuestra roca firme. Hoy exploraremos juntos sus páginas sagradas, buscando aplicación práctica para nuestras vidas.\n\nQue este tiempo de estudio nos acerque más a Jesús, la Palabra hecha carne, y nos equipe para vivir como sus discípulos en el mundo actual."
+            ],
+            "poema": "Libro de libros\nfuente de verdad\nen sus mensajes\nvida eterna está\n\nEstudiémoslo con celo\nmeditemos con amor\nes el divino anhelo\npara todo creyente en Dios"
+        },
+        "culto_familiar": {
+            "titulo": "Culto Familiar",
+            "descripcion": "Bienvenidas para el culto en el hogar",
+            "versiculo": {
+                "texto": "Yo y mi casa serviremos a Jehová",
+                "referencia": "Josué 24:15"
+            },
+            "contenido": [
+                "Bienvenidos a este tiempo sagrado en el hogar donde juntos como familia nos acercamos al trono de la gracia. El culto familiar es el fundamento espiritual que fortalece nuestros lazos y nos une en Cristo.\n\nQue este momento de oración, canto y estudio de la Palabra sea dulce comunión con Dios y entre nosotros. Que cada miembro de la familia sienta el amor divino que sobrepasa todo entendimiento.",
+                "📖📖📖📖📖📖📖📖📖📖",
+                "Bienvenidos a este espacio sagrado donde la familia se reúne alrededor de la Palabra de Dios. En medio de las ocupaciones diarias, este tiempo de culto familiar es un oasis espiritual que nutre nuestras almas y fortalece nuestros vínculos.\n\nHoy dedicamos estos minutos preciosos para conectarnos con
