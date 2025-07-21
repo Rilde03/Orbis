@@ -18,7 +18,7 @@
                     "referencia": "Mateo 18:20"
                 },
                 {
-                    "tipo": "palabras_bonitas",
+                    "tipo": "palabras_bienvenida",
                     "contenido": "Bienvenidos hermanos y hermanas en Cristo a este servicio de adoración. Hoy nos congregamos como un solo cuerpo para exaltar el nombre de nuestro Salvador. Que este tiempo de comunión espiritual nos fortalezca en la fe y nos una más estrechamente como familia de Dios."
                 }
             ]
@@ -36,11 +36,11 @@
                 },
                 {
                     "tipo": "texto_biblico",
-                    "contenido": "Lámpara es a mis pies tu palabra, y lumbrera a mi camino.",
-                    "referencia": "Salmos 119:105"
+                    "contenido": "Toda la Escritura es inspirada por Dios, y útil para enseñar, para redargüir, para corregir, para instruir en justicia.",
+                    "referencia": "2 Timoteo 3:16"
                 },
                 {
-                    "tipo": "palabras_bonitas",
+                    "tipo": "palabras_bienvenida",
                     "contenido": "Bienvenidos al estudio de la Palabra de Dios en este día. La Escuela Sabática es el momento propicio para profundizar en las verdades eternas que transforman vidas."
                 }
             ]
@@ -62,7 +62,7 @@
                     "referencia": "Salmos 119:9"
                 },
                 {
-                    "tipo": "palabras_bonitas",
+                    "tipo": "palabras_bienvenida",
                     "contenido": "¡Bienvenidos jóvenes guerreros de la fe! Hoy nos reunimos como generación consagrada que vive para glorificar a Dios. En un mundo que intenta seducirnos, nosotros alzamos la bandera de Cristo."
                 }
             ]
@@ -84,7 +84,7 @@
                     "referencia": "Proverbios 31:30"
                 },
                 {
-                    "tipo": "palabras_bonitas",
+                    "tipo": "palabras_bienvenida",
                     "contenido": "Bienvenidas queridas hermanas a este encuentro especial donde juntas creceremos en gracia y sabiduría. Como hijas del Rey, tenemos un llamado singular."
                 }
             ]
@@ -102,11 +102,11 @@
                 },
                 {
                     "tipo": "texto_biblico",
-                    "contenido": "Clama a mí, y yo te responderé, y te enseñaré cosas grandes y ocultas que tú no conoces.",
-                    "referencia": "Jeremías 33:3"
+                    "contenido": "No se inquieten por nada; más bien, en toda ocasión, con oración y ruego, presenten sus peticiones a Dios y denle gracias.",
+                    "referencia": "Filipenses 4:6"
                 },
                 {
-                    "tipo": "palabras_bonitas",
+                    "tipo": "palabras_bienvenida",
                     "contenido": "Bienvenidos a este sagrado espacio de comunión con el Cielo. Hoy presentamos nuestras súplicas ante el trono de la gracia, conscientes de que nuestro Dios escucha."
                 }
             ]
@@ -128,7 +128,7 @@
                     "referencia": "Proverbios 22:6"
                 },
                 {
-                    "tipo": "palabras_bonitas",
+                    "tipo": "palabras_bienvenida",
                     "contenido": "¡Bienvenidos pequeños héroes de la fe! Hoy tenemos un programa especial lleno de canciones y diversión mientras aprendemos de Jesús."
                 }
             ]
@@ -150,7 +150,7 @@
                     "referencia": "1 Pedro 5:8"
                 },
                 {
-                    "tipo": "palabras_bonitas",
+                    "tipo": "palabras_bienvenida",
                     "contenido": "Bienvenidos hermanos a este encuentro de varones de Dios. Hoy nos reunimos como guerreros espirituales, llamados a ser pilares en nuestras familias."
                 }
             ]
@@ -172,7 +172,7 @@
                     "referencia": "Salmos 103:3"
                 },
                 {
-                    "tipo": "palabras_bonitas",
+                    "tipo": "palabras_bienvenida",
                     "contenido": "Bienvenidos a este servicio especial donde confiamos en el poder sanador de nuestro Dios. Él conoce cada dolor, cada enfermedad."
                 }
             ]
