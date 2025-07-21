@@ -8,11 +8,20 @@
                 "referencia": "Salmos 95:6"
             },
             "bienvenidas": [
-                "Bienvenidos hermanos y hermanas en Cristo a este servicio de adoración. Hoy nos congregamos como un solo cuerpo para exaltar el nombre de nuestro Salvador. Que este tiempo de comunión espiritual nos fortalezca en la fe y nos una más estrechamente como familia de Dios.",
-                "En medio de un mundo lleno de afanes, hemos sido llamados a apartar este momento sagrado para contemplar la grandeza de nuestro Creador. Dejemos atrás las preocupaciones y enfoquemos nuestros corazones en la alabanza.",
-                "Hoy nos reunimos bajo la gracia redentora de Jesucristo. Que cada canto, cada oración y cada mensaje nos acerque más a Su presencia transformadora."
-            ],
-            "poema": "Hoy nos reunimos con alegría\npara alabar al Dios de vida\nen comunión y armonía\nnuestra fe está fortalecida"
+                {
+                    "tipo": "poesia",
+                    "contenido": "Hoy nos reunimos con alegría\npara alabar al Dios de vida\nen comunión y armonía\nnuestra fe está fortalecida"
+                },
+                {
+                    "tipo": "texto_biblico",
+                    "contenido": "Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos.",
+                    "referencia": "Mateo 18:20"
+                },
+                {
+                    "tipo": "palabras_bonitas",
+                    "contenido": "Bienvenidos hermanos y hermanas en Cristo a este servicio de adoración. Hoy nos congregamos como un solo cuerpo para exaltar el nombre de nuestro Salvador. Que este tiempo de comunión espiritual nos fortalezca en la fe y nos una más estrechamente como familia de Dios."
+                }
+            ]
         },
         "escuela_sabatica": {
             "titulo": "Escuela Sabática",
@@ -21,11 +30,20 @@
                 "referencia": "Juan 5:39"
             },
             "bienvenidas": [
-                "Bienvenidos al estudio de la Palabra de Dios en este día. La Escuela Sabática es el momento propicio para profundizar en las verdades eternas que transforman vidas.",
-                "Hoy exploraremos juntos las riquezas de la Biblia, ese tesoro inagotable que ilumina nuestro camino. Que este estudio no sea solo intelectual, sino que permitamos que la verdad penetre en nuestros corazones.",
-                "En un mundo de opiniones cambiantes, la Biblia permanece como nuestra brújula infalible. Cada lección es una oportunidad para conocer mejor el carácter de Dios."
-            ],
-            "poema": "La Biblia es nuestra guía\nlámpara es a nuestro pie\nen sus páginas hallamos\nla verdad que nos hace libres"
+                {
+                    "tipo": "poesia",
+                    "contenido": "La Biblia es nuestra guía\nlámpara es a nuestro pie\nen sus páginas hallamos\nla verdad que nos hace libres"
+                },
+                {
+                    "tipo": "texto_biblico",
+                    "contenido": "Lámpara es a mis pies tu palabra, y lumbrera a mi camino.",
+                    "referencia": "Salmos 119:105"
+                },
+                {
+                    "tipo": "palabras_bonitas",
+                    "contenido": "Bienvenidos al estudio de la Palabra de Dios en este día. La Escuela Sabática es el momento propicio para profundizar en las verdades eternas que transforman vidas."
+                }
+            ]
         },
         "sociedad_jovenes": {
             "titulo": "Sociedad de Jóvenes",
@@ -34,11 +52,20 @@
                 "referencia": "1 Timoteo 4:12"
             },
             "bienvenidas": [
-                "¡Bienvenidos jóvenes guerreros de la fe! Hoy nos reunimos como generación consagrada que vive para glorificar a Dios. En un mundo que intenta seducirnos, nosotros alzamos la bandera de Cristo.",
-                "Este es tu espacio para crecer, compartir y fortalecerte con otros que han decidido seguir a Jesús. ¡Prepárate para ser inspirado y desafiado en tu caminar con Dios!",
-                "Ustedes no son el futuro de la iglesia, son el presente activo de Dios. Hoy compartiremos experiencias que nos acercarán más a Cristo."
-            ],
-            "poema": "Juventud consagrada\nllena de vigor y luz\ncon la fe bien cimentada\nen la roca que es Jesús"
+                {
+                    "tipo": "poesia",
+                    "contenido": "Juventud consagrada\nllena de vigor y luz\ncon la fe bien cimentada\nen la roca que es Jesús"
+                },
+                {
+                    "tipo": "texto_biblico",
+                    "contenido": "¿Cómo puede el joven guardar puro su camino? Guardando tu palabra.",
+                    "referencia": "Salmos 119:9"
+                },
+                {
+                    "tipo": "palabras_bonitas",
+                    "contenido": "¡Bienvenidos jóvenes guerreros de la fe! Hoy nos reunimos como generación consagrada que vive para glorificar a Dios. En un mundo que intenta seducirnos, nosotros alzamos la bandera de Cristo."
+                }
+            ]
         },
         "ministerio_mujeres": {
             "titulo": "Ministerio de Mujeres",
@@ -47,11 +74,20 @@
                 "referencia": "Proverbios 14:1"
             },
             "bienvenidas": [
-                "Bienvenidas queridas hermanas a este encuentro especial donde juntas creceremos en gracia y sabiduría. Como hijas del Rey, tenemos un llamado singular.",
-                "Este es un espacio seguro donde podemos ser auténticas, compartir nuestras luchas y celebrar nuestras victorias. Juntas descubriremos cómo Dios nos equipa.",
-                "Como la mujer virtuosa de Proverbios 31, cada una tiene dones únicos que edifican a su familia y a la iglesia. Hoy nos enfocaremos en desarrollarlos."
-            ],
-            "poema": "Mujeres virtuosas\ncon propósito y valor\nsus vidas fructíferas\nhonran al Señor"
+                {
+                    "tipo": "poesia",
+                    "contenido": "Mujeres virtuosas\ncon propósito y valor\nsus vidas fructíferas\nhonran al Señor"
+                },
+                {
+                    "tipo": "texto_biblico",
+                    "contenido": "Engañosa es la gracia y vana la hermosura; la mujer que teme a Jehová, ésa será alabada.",
+                    "referencia": "Proverbios 31:30"
+                },
+                {
+                    "tipo": "palabras_bonitas",
+                    "contenido": "Bienvenidas queridas hermanas a este encuentro especial donde juntas creceremos en gracia y sabiduría. Como hijas del Rey, tenemos un llamado singular."
+                }
+            ]
         },
         "culto_oracion": {
             "titulo": "Culto de Oración",
@@ -60,11 +96,20 @@
                 "referencia": "1 Tesalonicenses 5:17"
             },
             "bienvenidas": [
-                "Bienvenidos a este sagrado espacio de comunión con el Cielo. Hoy presentamos nuestras súplicas ante el trono de la gracia, conscientes de que nuestro Dios escucha.",
-                "La oración es el aliento del alma, el vínculo que nos une a nuestro Padre celestial. Vengamos con corazones humildes y expectantes.",
-                "En este culto de oración, experimentaremos el poder transformador de comunicarnos con el Creador del universo. Vengan con expectativa."
-            ],
-            "poema": "La oración es poder\nes el alma que clama\nes el dulce deber\nde quien a Dios ama"
+                {
+                    "tipo": "poesia",
+                    "contenido": "La oración es poder\nes el alma que clama\nes el dulce deber\nde quien a Dios ama"
+                },
+                {
+                    "tipo": "texto_biblico",
+                    "contenido": "Clama a mí, y yo te responderé, y te enseñaré cosas grandes y ocultas que tú no conoces.",
+                    "referencia": "Jeremías 33:3"
+                },
+                {
+                    "tipo": "palabras_bonitas",
+                    "contenido": "Bienvenidos a este sagrado espacio de comunión con el Cielo. Hoy presentamos nuestras súplicas ante el trono de la gracia, conscientes de que nuestro Dios escucha."
+                }
+            ]
         },
         "sociedad_infantiles": {
             "titulo": "Sociedad de Infantiles",
@@ -73,11 +118,20 @@
                 "referencia": "Marcos 10:14"
             },
             "bienvenidas": [
-                "¡Bienvenidos pequeños héroes de la fe! Hoy tenemos un programa especial lleno de canciones y diversión mientras aprendemos de Jesús.",
-                "Cada uno de ustedes es especial para Dios y Él tiene grandes planes para sus vidas. Prepárense para descubrir las maravillosas verdades de la Biblia.",
-                "¡Hola niños y niñas! Hoy es un día especial para aprender, jugar y adorar juntos. Dios los ama mucho y nosotros también."
-            ],
-            "poema": "Pequeños corazones\npuros como la luz\nson bendiciones\nque vienen de Jesús"
+                {
+                    "tipo": "poesia",
+                    "contenido": "Pequeños corazones\npuros como la luz\nson bendiciones\nque vienen de Jesús"
+                },
+                {
+                    "tipo": "texto_biblico",
+                    "contenido": "Instruye al niño en su camino, y aun cuando fuere viejo no se apartará de él.",
+                    "referencia": "Proverbios 22:6"
+                },
+                {
+                    "tipo": "palabras_bonitas",
+                    "contenido": "¡Bienvenidos pequeños héroes de la fe! Hoy tenemos un programa especial lleno de canciones y diversión mientras aprendemos de Jesús."
+                }
+            ]
         },
         "ministerio_hombres": {
             "titulo": "Ministerio de Hombres",
@@ -86,11 +140,20 @@
                 "referencia": "Josué 1:9"
             },
             "bienvenidas": [
-                "Bienvenidos hermanos a este encuentro de varones de Dios. Hoy nos reunimos como guerreros espirituales, llamados a ser pilares en nuestras familias.",
-                "En una cultura que distorsiona la masculinidad, elegimos el modelo de Jesús: fuerte y tierno, valiente y compasivo.",
-                "Este es un espacio para fortalecernos y animarnos unos a otros en el camino de la santidad. Que salgamos más comprometidos con el llamado divino."
-            ],
-            "poema": "Hombres de valor\nfirmes en la verdad\ncon santo fervor\nguardando integridad"
+                {
+                    "tipo": "poesia",
+                    "contenido": "Hombres de valor\nfirmes en la verdad\ncon santo fervor\nguardando integridad"
+                },
+                {
+                    "tipo": "texto_biblico",
+                    "contenido": "Sed sobrios, y velad; porque vuestro adversario el diablo, como león rugiente, anda alrededor buscando a quien devorar.",
+                    "referencia": "1 Pedro 5:8"
+                },
+                {
+                    "tipo": "palabras_bonitas",
+                    "contenido": "Bienvenidos hermanos a este encuentro de varones de Dios. Hoy nos reunimos como guerreros espirituales, llamados a ser pilares en nuestras familias."
+                }
+            ]
         },
         "culto_sanidad": {
             "titulo": "Culto de Sanidad",
@@ -99,11 +162,20 @@
                 "referencia": "Éxodo 15:26"
             },
             "bienvenidas": [
-                "Bienvenidos a este servicio especial donde confiamos en el poder sanador de nuestro Dios. Él conoce cada dolor, cada enfermedad.",
-                "Dios sigue siendo el mismo ayer, hoy y siempre, y su poder para sanar no ha disminuido. Vengan con expectativa.",
-                "En un mundo lleno de dolor, tenemos la seguridad de que nuestro Dios es poderoso para sanar, restaurar y renovar."
-            ],
-            "poema": "Hay poder en el nombre\nque todo mal sana\nhay divino perfume\nque toda pena calma"
+                {
+                    "tipo": "poesia",
+                    "contenido": "Hay poder en el nombre\nque todo mal sana\nhay divino perfume\nque toda pena calma"
+                },
+                {
+                    "tipo": "texto_biblico",
+                    "contenido": "El es quien perdona todas tus iniquidades, el que sana todas tus dolencias.",
+                    "referencia": "Salmos 103:3"
+                },
+                {
+                    "tipo": "palabras_bonitas",
+                    "contenido": "Bienvenidos a este servicio especial donde confiamos en el poder sanador de nuestro Dios. Él conoce cada dolor, cada enfermedad."
+                }
+            ]
         }
     }
 }
