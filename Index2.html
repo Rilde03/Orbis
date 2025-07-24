@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programas Jóvenes Adventistas</title>
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --secondary: #FFC107;
+            --accent: #1565C0;
+            --light: #f5f5f5;
+            --dark: #212121;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 100%;
+            padding: 0 15px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), #1B5E20);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 5px solid var(--secondary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 10px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .logo img {
+            width: 70%;
+            height: 70%;
+            object-fit: contain;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .search-bar {
+            margin: 20px 0;
+            padding: 0 10px;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 30px;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-size: 1rem;
+        }
+        
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 0 10px;
+            margin-bottom: 25px;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .category-card:active {
+            transform: scale(0.98);
+        }
+        
+        .category-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        
+        .category-name {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .recent-programs {
+            padding: 0 10px;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--secondary);
+            display: inline-block;
+        }
+        
+        .program-card {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .program-image {
+            height: 150px;
+            background-color: var(--accent);
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .program-info {
+            padding: 15px;
+        }
+        
+        .program-title {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .program-date {
+            font-size: 0.9rem;
+            color: #757575;
+            margin-bottom: 10px;
+        }
+        
+        .program-description {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .social-icon {
+            color: white;
+            font-size: 1.5rem;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://via.placeholder.com/50x50?text=JA" alt="Logo Jóvenes Adventistas">
+        </div>
+        <h1>Repositorio JA</h1>
+        <p class="subtitle">Programas y recursos para la sociedad de jóvenes</p>
+    </header>
+    
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar programas...">
+        </div>
+        
+        <div class="categories">
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-bible"></i>
+                </div>
+                <div class="category-name">Estudios Bíblicos</div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-music"></i>
+                </div>
+                <div class="category-name">Alabanza</div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="category-name">Consejos JA</div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="category-name">Eventos</div>
+            </div>
+        </div>
+        
+        <div class="recent-programs">
+            <h2 class="section-title">Programas Recientes</h2>
+            
+            <div class="program-card">
+                <div class="program-image" style="background-image: url('https://via.placeholder.com/300x150?text=Retiro+Espiritual')"></div>
+                <div class="program-info">
+                    <h3 class="program-title">Retiro Espiritual 2023</h3>
+                    <div class="program-date">15-17 de Septiembre, 2023</div>
+                    <p class="program-description">Material completo para el retiro espiritual de jóvenes con temas sobre el Espíritu Santo.</p>
+                    <a href="#" class="download-btn">Descargar</a>
+                </div>
+            </div>
+            
+            <div class="program-card">
+                <div class="program-image" style="background-image: url('https://via.placeholder.com/300x150?text=Semana+Santa')"></div>
+                <div class="program-info">
+                    <h3 class="program-title">Programa Semana Santa</h3>
+                    <div class="program-date">1-8 de Abril, 2023</div>
+                    <p class="program-description">Guía completa para la semana de oración juvenil con temas relevantes para los jóvenes.</p>
+                    <a href="#" class="download-btn">Descargar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="social-icons">
+            <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p>Sociedad de Jóvenes Adventistas</p>
+        <p>© 2023 Todos los derechos reservados</p>
+    </footer>
+</body>
+</html>
