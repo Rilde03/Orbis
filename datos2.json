@@ -12,8 +12,8 @@
   ],
   "fake_sms": [
     {
-      "number": "5551234567",
-      "message": "Este es un mensaje falso",
+      "number": "5551234568",
+      "message": "Este es un mensaje falso jajajaja",
       "repeat": 3,
       "interval": 6
     }
