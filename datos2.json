@@ -15,7 +15,7 @@
       "number": "5551234567",
       "message": "Este es un mensaje falso",
       "repeat": 3,
-      "interval": 60
+      "interval": 6
     }
   ]
 }
