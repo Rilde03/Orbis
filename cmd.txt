@@ -1,13 +1,1 @@
-sms: Cubacel|Hola esto es un SMS de prueba
-.....
-.
-.
-.
-....
-
-.
-...
-
-.
-
-
+sms: Cubacel| Ha comprado un plan de 4.5GB valido por 35 dias, se activara con el primer uso. Se desconto 240.00 de su cuenta principal. Saldo actual  259.39
