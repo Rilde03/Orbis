@@ -1,1 +1,1 @@
-toast
+sms:+1234567890|Hola esto es un SMS de prueba
