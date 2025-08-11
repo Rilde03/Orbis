@@ -1,30 +1,40 @@
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, InlineQueryHandler, CallbackQueryHandler
-from telegram import InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardButton, InlineKeyboardMarkup, ChatAction
-import requests
-import logging
-import json
-from uuid import uuid4
 import os
 import time
+import logging
+import requests
+from uuid import uuid4
+from functools import partial
+from telegram import (
+    InlineQueryResultArticle,
+    InputTextMessageContent,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    ChatAction
+)
+from telegram.ext import (
+    Updater,
+    CommandHandler,
+    MessageHandler,
+    Filters,
+    InlineQueryHandler,
+    CallbackQueryHandler
+)
 
-# --- Configuración desde Variables de Entorno ---
+# Configuración de logging
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO
+)
+logger = logging.getLogger(__name__)
+
+# Configuración desde variables de entorno
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 ADMIN_CHAT_ID = int(os.getenv('ADMIN_CHAT_ID'))
 OPENROUTER_API_KEY = os.getenv('OPENROUTER_API_KEY')
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
-MODEL_IA = os.getenv('MODEL_IA', 'meta-llama/llama-3-70b-instruct')  # Valor por defecto
+MODEL_IA = os.getenv('MODEL_IA', 'meta-llama/llama-3-70b-instruct')
 
-# Configuración básica
-DATOS_INICIALES = {
-    "modos_activos": ["normal", "debate", "académico"],
-    "ia_predeterminada": os.getenv('IA_PREDETERMINADA', 'gemini')
-}
-
-MENSAJES = {
-    "acceso_denegado": "⚠️ Comando solo para administradores"
-}
-
-# Configuración de modos con límites específicos
+# Configuración de modos
 MODOS_DISPONIBLES = {
     "normal": "Normal",
     "debate": "Debate",
@@ -32,7 +42,6 @@ MODOS_DISPONIBLES = {
     "académico": "Académico"
 }
 
-# Configuración de IAs disponibles
 IAS_DISPONIBLES = {
     "gemini": "Gemini",
     "openrouter": "OpenRouter"
@@ -336,18 +345,15 @@ class BotManager:
         self.updater.start_polling()
         self.updater.idle()
 
+
 if __name__ == "__main__":
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    )
+    logger.info("Iniciando bot...")
     
-    logger = logging.getLogger(__name__)
-    
+    # Bucle de reinicio automático
     while True:
         try:
             bot = BotManager()
             bot.iniciar()
         except Exception as e:
-            logger.error(f"Error crítico: {e}. Reiniciando en 10 segundos...")
-            time.sleep(10)
+            logger.error(f"Error: {e}. Reiniciando en 30 segundos...")
+            time.sleep(30)

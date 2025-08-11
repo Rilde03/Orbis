@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: aiorbis-bot
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    envVars:
+      - key: TELEGRAM_TOKEN
+        value: 7561609533:AAEh1IzS_U79nYBdOtgtf-O5cJDvDbqPkuY
+      - key: ADMIN_CHAT_ID
+        value: 5356844745
+      - key: OPENROUTER_API_KEY
+        value: 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
+      - key: GEMINI_API_KEY
+        value: AIzaSyArTZFg0DZtR-aF0dfxYdzmIgrtCMUmSL4
+      - key: MODEL_IA
+        value: meta-llama/llama-3-70b-instruct
+      - key: IA_PREDETERMINADA
+        value: gemini
