@@ -1,18 +1,28 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, InlineQueryHandler, CallbackQueryHandler
 from telegram import InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardButton, InlineKeyboardMarkup, ChatAction
-from config import *
 import requests
 import logging
 import json
 from uuid import uuid4
-from functools import partial
+import os
+import time
 
-# Configuración de logging
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.INFO
-)
-logger = logging.getLogger(__name__)
+# --- Configuración desde Variables de Entorno ---
+TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
+ADMIN_CHAT_ID = int(os.getenv('ADMIN_CHAT_ID'))
+OPENROUTER_API_KEY = os.getenv('OPENROUTER_API_KEY')
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+MODEL_IA = os.getenv('MODEL_IA', 'meta-llama/llama-3-70b-instruct')  # Valor por defecto
+
+# Configuración básica
+DATOS_INICIALES = {
+    "modos_activos": ["normal", "debate", "académico"],
+    "ia_predeterminada": os.getenv('IA_PREDETERMINADA', 'gemini')
+}
+
+MENSAJES = {
+    "acceso_denegado": "⚠️ Comando solo para administradores"
+}
 
 # Configuración de modos con límites específicos
 MODOS_DISPONIBLES = {
@@ -38,12 +48,10 @@ class ServicioIA:
             "académico": "Responde formalmente con conceptos relevantes. Cita fuentes brevemente si es necesario." + (" Máximo 300 palabras." if es_inline else "")
         }
         
-        # Primero intentamos con la IA seleccionada
         if ia_seleccionada == "gemini":
             respuesta, error = ServicioIA._generar_gemini(modo, sistemas.get(modo, ""), consulta, es_inline)
             if not error:
                 return respuesta, None
-            # Si falla Gemini, intentamos con OpenRouter
             logger.warning(f"Falló Gemini, intentando con OpenRouter. Error: {error}")
             return ServicioIA._generar_openrouter(modo, sistemas.get(modo, ""), consulta, es_inline)
         else:
@@ -302,7 +310,6 @@ class BotManager:
             
         texto = update.message.text
         
-        # Enviar acción "escribiendo" mientras se procesa
         context.bot.send_chat_action(
             chat_id=update.effective_chat.id,
             action=ChatAction.TYPING
@@ -330,5 +337,17 @@ class BotManager:
         self.updater.idle()
 
 if __name__ == "__main__":
-    bot = BotManager()
-    bot.iniciar()
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
+    
+    logger = logging.getLogger(__name__)
+    
+    while True:
+        try:
+            bot = BotManager()
+            bot.iniciar()
+        except Exception as e:
+            logger.error(f"Error crítico: {e}. Reiniciando en 10 segundos...")
+            time.sleep(10)
