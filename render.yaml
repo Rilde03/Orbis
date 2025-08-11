@@ -2,6 +2,7 @@ services:
   - type: web
     name: aiorbis-bot
     runtime: python
+    pythonVersion: "3.10.13"
     buildCommand: pip install -r requirements.txt
     startCommand: python bot.py
     envVars:
@@ -15,5 +16,3 @@ services:
         value: AIzaSyArTZFg0DZtR-aF0dfxYdzmIgrtCMUmSL4
       - key: MODEL_IA
         value: meta-llama/llama-3-70b-instruct
-      - key: IA_PREDETERMINADA
-        value: gemini
