@@ -22,7 +22,7 @@ from telegram.ext import (
     filters
 )
 
-# Configuración básica
+# Configuración de logging
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
@@ -36,8 +36,8 @@ OPENROUTER_API_KEY = os.getenv('OPENROUTER_API_KEY')
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 MODEL_IA = os.getenv('MODEL_IA', 'meta-llama/llama-3-70b-instruct')
 
-# URLs de API actualizadas
-GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key={}".format(GEMINI_API_KEY)
+# URLs de API
+GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key={GEMINI_API_KEY}"
 OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 # Configuración de modos
@@ -77,10 +77,10 @@ class ServicioIA:
         
         try:
             if ia_seleccionada == "gemini":
-                respuesta = await ServicioIA._generar_gemini(modo, sistemas.get(modo, ""), consulta, es_inline)
-                if respuesta[1] is None:
-                    return respuesta
-                logger.warning(f"Falló Gemini: {respuesta[1]}. Intentando con OpenRouter...")
+                respuesta, error = await ServicioIA._generar_gemini(modo, sistemas.get(modo, ""), consulta, es_inline)
+                if not error:
+                    return respuesta, None
+                logger.warning(f"Falló Gemini: {error}. Intentando con OpenRouter...")
             
             return await ServicioIA._generar_openrouter(modo, sistemas.get(modo, ""), consulta, es_inline)
         except Exception as e:
@@ -90,10 +90,7 @@ class ServicioIA:
     @staticmethod
     async def _generar_gemini(modo, sistema, consulta, es_inline):
         try:
-            headers = {
-                'Content-Type': 'application/json'
-            }
-            
+            headers = {'Content-Type': 'application/json'}
             prompt = {
                 "contents": [{
                     "parts": [{
@@ -174,16 +171,11 @@ class BotManager:
 
     async def iniciar(self):
         """Inicia el bot con manejo adecuado del bucle de eventos"""
-        try:
-            self.application = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
-            self._configurar_handlers()
-            
-            logger.info("Bot multi-modo iniciado")
-            await self.application.run_polling()
-            
-        except Exception as e:
-            logger.error(f"Error en la ejecución: {e}")
-            raise
+        self.application = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
+        self._configurar_handlers()
+        
+        logger.info("Bot multi-modo iniciado")
+        await self.application.run_polling()
 
     def _configurar_handlers(self):
         dp = self.application
@@ -404,17 +396,27 @@ class BotManager:
         if update and update.effective_message:
             await update.effective_message.reply_text(MENSAJES["error"])
 
-async def main():
+def main():
+    """Función principal con manejo adecuado del bucle de eventos"""
     bot = BotManager()
-    await bot.iniciar()
+    
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    
+    try:
+        loop.run_until_complete(bot.iniciar())
+    except KeyboardInterrupt:
+        logger.info("Bot detenido manualmente")
+    except Exception as e:
+        logger.error(f"Error crítico: {e}")
+    finally:
+        loop.close()
+        logger.info("Bucle de eventos cerrado correctamente")
 
 if __name__ == "__main__":
     while True:
         try:
-            asyncio.run(main())
-        except KeyboardInterrupt:
-            logger.info("Bot detenido manualmente")
-            break
+            main()
         except Exception as e:
-            logger.error(f"Error crítico: {e}. Reiniciando en 30 segundos...")
+            logger.error(f"Error inesperado: {e}. Reiniciando en 30 segundos...")
             time.sleep(30)
