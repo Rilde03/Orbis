@@ -1,10 +1,9 @@
 import os
 import time
 import logging
+import asyncio
 import requests
-import json
 from uuid import uuid4
-from functools import partial
 from telegram import (
     Update,
     InlineQueryResultArticle,
@@ -56,7 +55,9 @@ DATOS_INICIALES = {
 }
 
 MENSAJES = {
-    "acceso_denegado": "⚠️ Comando solo para administradores"
+    "acceso_denegado": "⚠️ Comando solo para administradores",
+    "bienvenida": "🤖 Aiorbis Multi-Modo\nUsa /menu para ver opciones",
+    "error": "Error procesando tu solicitud"
 }
 
 class ServicioIA:
@@ -110,7 +111,7 @@ class ServicioIA:
         try:
             timeout = 10 if es_inline else 30
             
-            respuesta = requests.post(
+            response = requests.post(
                 "https://openrouter.ai/api/v1/chat/completions",
                 headers={
                     "Authorization": f"Bearer {OPENROUTER_API_KEY}",
@@ -134,18 +135,42 @@ class ServicioIA:
                 },
                 timeout=timeout
             )
-            respuesta.raise_for_status()
-            return respuesta.json()["choices"][0]["message"]["content"].strip(), None
+            response.raise_for_status()
+            return response.json()["choices"][0]["message"]["content"].strip(), None
         except Exception as e:
             logger.error(f"Error en OpenRouter: {str(e)}")
             return f"Error procesando tu consulta en OpenRouter (modo {modo}).", str(e)
 
 class BotManager:
     def __init__(self):
-        self.application = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
+        self.application = None
         self.modos_activos = set(DATOS_INICIALES["modos_activos"])
         self.ia_seleccionada = DATOS_INICIALES["ia_predeterminada"]
-        self._configurar_handlers()
+
+    async def iniciar(self):
+        """Inicia el bot con manejo adecuado del bucle de eventos"""
+        try:
+            self.application = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
+            self._configurar_handlers()
+            
+            logger.info("Bot multi-modo iniciado")
+            await self.application.initialize()
+            await self.application.start()
+            await self.application.updater.start_polling()
+            
+            # Mantener el bot corriendo
+            while True:
+                await asyncio.sleep(3600)  # Espera 1 hora
+            
+        except asyncio.CancelledError:
+            pass
+        except Exception as e:
+            logger.error(f"Error en la ejecución: {e}")
+            raise
+        finally:
+            if self.application:
+                await self.application.stop()
+                await self.application.shutdown()
 
     def _configurar_handlers(self):
         dp = self.application
@@ -163,7 +188,7 @@ class BotManager:
         dp.add_error_handler(self._manejar_errores)
 
     async def _mostrar_menu(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        if update.effective_chat.id != ADMIN_CHAT_ID:
+        if update.effective_chat and update.effective_chat.id != ADMIN_CHAT_ID:
             await update.message.reply_text(MENSAJES["acceso_denegado"])
             return
             
@@ -190,7 +215,7 @@ class BotManager:
                 reply_markup=reply_markup
             )
             await update.callback_query.answer()
-        else:
+        elif update.message:
             await update.message.reply_text(
                 text=mensaje,
                 reply_markup=reply_markup
@@ -219,7 +244,7 @@ class BotManager:
                 reply_markup=reply_markup
             )
             await update.callback_query.answer()
-        else:
+        elif update.message:
             await update.message.reply_text(
                 text=mensaje,
                 reply_markup=reply_markup
@@ -248,7 +273,7 @@ class BotManager:
                 reply_markup=reply_markup
             )
             await update.callback_query.answer()
-        else:
+        elif update.message:
             await update.message.reply_text(
                 text=mensaje,
                 reply_markup=reply_markup
@@ -256,11 +281,12 @@ class BotManager:
 
     async def _manejar_callbacks(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         query = update.callback_query
+        await query.answer()
+        
         data = query.data
         
         if data == 'cerrar':
             await query.delete_message()
-            await query.answer()
             return
             
         if data.startswith('modo_'):
@@ -283,8 +309,6 @@ class BotManager:
             
         elif data == 'menu_principal':
             await self._mostrar_menu(update, context)
-        
-        await query.answer()
 
     async def _inline_query(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         query = update.inline_query.query
@@ -326,7 +350,7 @@ class BotManager:
             await update.inline_query.answer([], cache_time=0)
 
     async def _procesar_mensaje(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        if update.effective_chat.id != ADMIN_CHAT_ID:
+        if update.effective_chat and update.effective_chat.id != ADMIN_CHAT_ID:
             return
             
         texto = update.message.text
@@ -350,11 +374,7 @@ class BotManager:
     async def _manejar_errores(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         logger.error(f"Error: {str(context.error)}")
         if update and update.effective_message:
-            await update.effective_message.reply_text("⚠️ Ocurrió un error al procesar tu solicitud. Por favor intenta nuevamente.")
-
-    async def iniciar(self):
-        logger.info("Bot multi-modo iniciado")
-        await self.application.run_polling()
+            await update.effective_message.reply_text(MENSAJES["error"])
 
 async def main():
     bot = BotManager()
@@ -363,8 +383,10 @@ async def main():
 if __name__ == "__main__":
     while True:
         try:
-            import asyncio
             asyncio.run(main())
+        except KeyboardInterrupt:
+            logger.info("Bot detenido manualmente")
+            break
         except Exception as e:
             logger.error(f"Error crítico: {e}. Reiniciando en 30 segundos...")
             time.sleep(30)
