@@ -22,55 +22,47 @@ from telegram.ext import (
     filters
 )
 
-# Configuración de logging mejorada
+# Configuración de logging
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.INFO,
-    handlers=[
-        logging.StreamHandler(),
-        logging.FileHandler('bot.log')
-    ]
+    level=logging.INFO
 )
 logger = logging.getLogger(__name__)
 
-# Configuración desde variables de entorno con validación
-def get_env_var(name, default=None, required=False):
-    value = os.getenv(name, default)
-    if required and value is None:
-        logger.error(f"Falta la variable de entorno requerida: {name}")
-        raise ValueError(f"La variable de entorno {name} es requerida")
-    return value
+# Configuración desde variables de entorno
+TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
+ADMIN_CHAT_ID = int(os.getenv('ADMIN_CHAT_ID', 0))
+OPENROUTER_API_KEY = os.getenv('OPENROUTER_API_KEY')
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+MODEL_IA = os.getenv('MODEL_IA', 'meta-llama/llama-3-70b-instruct')
 
-TELEGRAM_TOKEN = get_env_var('TELEGRAM_TOKEN', required=True)
-ADMIN_CHAT_ID = int(get_env_var('ADMIN_CHAT_ID', '0'))
-OPENROUTER_API_KEY = get_env_var('OPENROUTER_API_KEY')
-GEMINI_API_KEY = get_env_var('GEMINI_API_KEY')
-MODEL_IA = get_env_var('MODEL_IA', 'meta-llama/llama-3-70b-instruct')
-PORT = int(get_env_var('PORT', '10000'))
-
-# Configuración de modos mejorada
+# Configuración de modos
 MODOS_DISPONIBLES = {
-    "normal": {"nombre": "Normal", "desc": "Respuestas equilibradas"},
-    "debate": {"nombre": "Debate", "desc": "Postura crítica y argumentativa"},
-    "gracioso": {"nombre": "Gracioso", "desc": "Respuestas con humor"},
-    "académico": {"nombre": "Académico", "desc": "Respuestas formales con referencias"}
+    "normal": "Normal",
+    "debate": "Debate",
+    "gracioso": "Gracioso",
+    "académico": "Académico"
 }
 
 IAS_DISPONIBLES = {
-    "gemini": {"nombre": "Gemini", "requiere_key": GEMINI_API_KEY is not None},
-    "openrouter": {"nombre": "OpenRouter", "requiere_key": OPENROUTER_API_KEY is not None}
+    "gemini": "Gemini",
+    "openrouter": "OpenRouter"
 }
 
-# Validación de configuraciones de IA disponibles
-IAS_ACTIVAS = {k: v for k, v in IAS_DISPONIBLES.items() if v["requiere_key"]}
-if not IAS_ACTIVAS:
-    logger.error("No hay servicios de IA configurados correctamente")
-    raise ValueError("Al menos un servicio de IA debe estar configurado (Gemini u OpenRouter)")
+DATOS_INICIALES = {
+    "modos_activos": ["normal", "debate", "académico"],
+    "ia_predeterminada": "gemini"
+}
+
+MENSAJES = {
+    "acceso_denegado": "⚠️ Comando solo para administradores",
+    "bienvenida": "🤖 Aiorbis Multi-Modo\nUsa /menu para ver opciones",
+    "error": "Error procesando tu solicitud"
+}
 
 class ServicioIA:
     @staticmethod
     async def generar_respuesta(ia_seleccionada, modo, consulta, es_inline=False):
-        """Genera respuesta usando el servicio de IA seleccionado"""
         sistemas = {
             "normal": "Responde de forma clara y completa." + (" Máximo 200 palabras." if es_inline else ""),
             "debate": "Analiza críticamente y refuta puntos clave. Sé contundente pero educado." + (" Máximo 300 palabras." if es_inline else ""),
@@ -78,29 +70,17 @@ class ServicioIA:
             "académico": "Responde formalmente con conceptos relevantes. Cita fuentes brevemente si es necesario." + (" Máximo 300 palabras." if es_inline else "")
         }
         
-        sistema = sistemas.get(modo, sistemas["normal"])
-        
-        try:
-            if ia_seleccionada == "gemini" and IAS_DISPONIBLES["gemini"]["requiere_key"]:
-                respuesta = await ServicioIA._generar_gemini(modo, sistema, consulta, es_inline)
+        if ia_seleccionada == "gemini":
+            respuesta, error = await ServicioIA._generar_gemini(modo, sistemas.get(modo, ""), consulta, es_inline)
+            if not error:
                 return respuesta, None
-            elif ia_seleccionada == "openrouter" and IAS_DISPONIBLES["openrouter"]["requiere_key"]:
-                respuesta = await ServicioIA._generar_openrouter(modo, sistema, consulta, es_inline)
-                return respuesta, None
-            else:
-                # Fallback a la primera IA disponible
-                for ia, config in IAS_ACTIVAS.items():
-                    respuesta = await ServicioIA._generar_respuesta_ia(ia, modo, sistema, consulta, es_inline)
-                    if respuesta:
-                        return respuesta, None
-                return "No hay servicios de IA disponibles en este momento", "No hay IAs configuradas"
-        except Exception as e:
-            logger.error(f"Error generando respuesta: {str(e)}")
-            return f"Error procesando tu consulta. Por favor intenta nuevamente.", str(e)
+            logger.warning(f"Falló Gemini, intentando con OpenRouter. Error: {error}")
+            return await ServicioIA._generar_openrouter(modo, sistemas.get(modo, ""), consulta, es_inline)
+        else:
+            return await ServicioIA._generar_openrouter(modo, sistemas.get(modo, ""), consulta, es_inline)
 
     @staticmethod
     async def _generar_gemini(modo, sistema, consulta, es_inline):
-        """Genera respuesta usando Gemini API"""
         try:
             headers = {
                 'Content-Type': 'application/json',
@@ -110,24 +90,27 @@ class ServicioIA:
             prompt = f"Eres Aiorbis. Modo: {modo}. {sistema}\nConsulta: {consulta}"
             data = {"contents": [{"parts": [{"text": prompt}]}]}
             
+            timeout = 10 if es_inline else 30
+            
             response = requests.post(
-                "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent",
+                "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
                 headers=headers,
                 json=data,
-                timeout=10 if es_inline else 30
+                timeout=timeout
             )
             response.raise_for_status()
             
             result = response.json()
-            return result["candidates"][0]["content"]["parts"][0]["text"]
+            return result["candidates"][0]["content"]["parts"][0]["text"], None
         except Exception as e:
             logger.error(f"Error en Gemini: {str(e)}")
-            raise
+            return f"Error de conexión con Gemini (modo {modo}).", str(e)
 
     @staticmethod
     async def _generar_openrouter(modo, sistema, consulta, es_inline):
-        """Genera respuesta usando OpenRouter API"""
         try:
+            timeout = 10 if es_inline else 30
+            
             response = requests.post(
                 "https://openrouter.ai/api/v1/chat/completions",
                 headers={
@@ -150,175 +133,153 @@ class ServicioIA:
                     "temperature": 0.7 if modo == "gracioso" else 0.5,
                     "max_tokens": 500 if es_inline else 1500
                 },
-                timeout=10 if es_inline else 30
+                timeout=timeout
             )
             response.raise_for_status()
-            return response.json()["choices"][0]["message"]["content"].strip()
+            return response.json()["choices"][0]["message"]["content"].strip(), None
         except Exception as e:
             logger.error(f"Error en OpenRouter: {str(e)}")
-            raise
+            return f"Error procesando tu consulta en OpenRouter (modo {modo}).", str(e)
 
 class BotManager:
     def __init__(self):
         self.application = None
-        self.modos_activos = {"normal"}  # Solo modo normal por defecto
-        self.ia_seleccionada = next(iter(IAS_ACTIVAS.keys()))  # Primera IA disponible
+        self.modos_activos = set(DATOS_INICIALES["modos_activos"])
+        self.ia_seleccionada = DATOS_INICIALES["ia_predeterminada"]
 
     async def iniciar(self):
-        """Inicia el bot con configuración adecuada para Render"""
+        """Inicia el bot con manejo adecuado del bucle de eventos"""
         try:
-            self.application = (
-                ApplicationBuilder()
-                .token(TELEGRAM_TOKEN)
-                .http_version("1.1")
-                .get_updates_http_version("1.1")
-                .build()
-            )
-            
+            self.application = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
             self._configurar_handlers()
             
-            logger.info("Iniciando bot multi-modo...")
-            
-            # Configuración para Render
+            logger.info("Bot multi-modo iniciado")
             await self.application.initialize()
             await self.application.start()
+            await self.application.updater.start_polling()
             
-            if os.getenv('RENDER'):
-                # En Render, usamos webhook
-                url = f"https://{os.getenv('RENDER_EXTERNAL_HOSTNAME')}/{TELEGRAM_TOKEN}"
-                await self.application.bot.setWebhook(url)
-                logger.info(f"Webhook configurado en: {url}")
-            else:
-                # Localmente, usamos polling
-                await self.application.updater.start_polling()
-                logger.info("Usando polling para updates")
-            
-            # Mantener la aplicación corriendo
+            # Mantener el bot corriendo
             while True:
-                await asyncio.sleep(3600)
-                
+                await asyncio.sleep(3600)  # Espera 1 hora
+            
+        except asyncio.CancelledError:
+            pass
         except Exception as e:
-            logger.error(f"Error al iniciar el bot: {e}")
+            logger.error(f"Error en la ejecución: {e}")
             raise
         finally:
-            await self._apagar_bot()
-
-    async def _apagar_bot(self):
-        """Apaga el bot de manera limpia"""
-        if self.application:
-            logger.info("Apagando bot...")
-            try:
+            if self.application:
                 await self.application.stop()
                 await self.application.shutdown()
-            except Exception as e:
-                logger.error(f"Error al apagar el bot: {e}")
 
     def _configurar_handlers(self):
-        """Configura todos los handlers del bot"""
         dp = self.application
         
-        # Handlers de comandos
         dp.add_handler(CommandHandler('start', self._mostrar_menu))
         dp.add_handler(CommandHandler('menu', self._mostrar_menu))
         dp.add_handler(CommandHandler('modos', self._mostrar_modos))
         dp.add_handler(CommandHandler('ia', self._mostrar_ia))
-        dp.add_handler(CommandHandler('status', self._mostrar_status))
         
-        # Handlers de interacción
         dp.add_handler(CallbackQueryHandler(self._manejar_callbacks))
+        
         dp.add_handler(InlineQueryHandler(self._inline_query))
+        dp.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, self._procesar_mensaje))
         
-        # Handler de mensajes regulares
-        dp.add_handler(MessageHandler(
-            filters.TEXT & ~filters.COMMAND & filters.Chat(chat_id=ADMIN_CHAT_ID),
-            self._procesar_mensaje
-        ))
-        
-        # Manejo de errores
         dp.add_error_handler(self._manejar_errores)
 
     async def _mostrar_menu(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Muestra el menú principal"""
-        if not self._es_admin(update):
+        if update.effective_chat and update.effective_chat.id != ADMIN_CHAT_ID:
+            await update.message.reply_text(MENSAJES["acceso_denegado"])
             return
             
-        modos_activos = ", ".join([MODOS_DISPONIBLES[m]["nombre"] for m in self.modos_activos])
+        modos_activos = ", ".join([MODOS_DISPONIBLES[m] for m in self.modos_activos])
         
         keyboard = [
-            [InlineKeyboardButton("⚙️ Cambiar Modos", callback_data='modos_menu')],
-            [InlineKeyboardButton("🧠 Cambiar IA", callback_data='ia_menu')],
-            [InlineKeyboardButton("📊 Status", callback_data='status')],
-            [InlineKeyboardButton("❌ Cerrar", callback_data='cerrar')]
+            [InlineKeyboardButton("Cambiar Modos", callback_data='modos_menu')],
+            [InlineKeyboardButton("Cambiar IA", callback_data='ia_menu')],
+            [InlineKeyboardButton("Cerrar", callback_data='cerrar')]
         ]
         
         reply_markup = InlineKeyboardMarkup(keyboard)
         
         mensaje = (
-            f"🤖 <b>Aiorbis Multi-Modo</b>\n\n"
-            f"🔧 <b>Modos activos:</b> {modos_activos}\n"
-            f"🧠 <b>IA seleccionada:</b> {IAS_DISPONIBLES[self.ia_seleccionada]['nombre']}\n\n"
-            "💡 Usa @{context.bot.username} en cualquier chat para consultas inline"
+            f"🤖 Aiorbis Multi-Modo\n\n"
+            f"🔧 Modos activos: {modos_activos}\n"
+            f"🧠 IA seleccionada: {IAS_DISPONIBLES[self.ia_seleccionada]}\n\n"
+            "💡 Usa @tu_bot en cualquier chat para consultas inline"
         )
         
-        await self._responder_o_editar(update, mensaje, reply_markup)
+        if update.callback_query:
+            await update.callback_query.edit_message_text(
+                text=mensaje,
+                reply_markup=reply_markup
+            )
+            await update.callback_query.answer()
+        elif update.message:
+            await update.message.reply_text(
+                text=mensaje,
+                reply_markup=reply_markup
+            )
 
     async def _mostrar_modos(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Muestra la interfaz de selección de modos"""
         keyboard = []
-        for modo, config in MODOS_DISPONIBLES.items():
+        for modo, nombre in MODOS_DISPONIBLES.items():
             estado = "✅" if modo in self.modos_activos else "❌"
             keyboard.append([
                 InlineKeyboardButton(
-                    f"{estado} {config['nombre']}",
+                    f"{estado} {nombre}",
                     callback_data=f"modo_{modo}"
                 )
             ])
             
         keyboard.append([InlineKeyboardButton("🔙 Volver al Menú", callback_data='menu_principal')])
+            
+        reply_markup = InlineKeyboardMarkup(keyboard)
         
-        mensaje = "⚙️ <b>Configuración de modos de respuesta:</b>\n" + \
-                 "\n".join([f"{config['nombre']}: {config['desc']}" for modo, config in MODOS_DISPONIBLES.items()])
+        mensaje = "⚙️ Configuración de modos de respuesta:"
         
-        await self._responder_o_editar(update, mensaje, InlineKeyboardMarkup(keyboard))
+        if update.callback_query:
+            await update.callback_query.edit_message_text(
+                text=mensaje,
+                reply_markup=reply_markup
+            )
+            await update.callback_query.answer()
+        elif update.message:
+            await update.message.reply_text(
+                text=mensaje,
+                reply_markup=reply_markup
+            )
 
     async def _mostrar_ia(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Muestra la interfaz de selección de IA"""
         keyboard = []
-        for ia, config in IAS_ACTIVAS.items():
+        for ia, nombre in IAS_DISPONIBLES.items():
             estado = "✅" if ia == self.ia_seleccionada else "❌"
             keyboard.append([
                 InlineKeyboardButton(
-                    f"{estado} {config['nombre']}",
+                    f"{estado} {nombre}",
                     callback_data=f"ia_{ia}"
                 )
             ])
             
         keyboard.append([InlineKeyboardButton("🔙 Volver al Menú", callback_data='menu_principal')])
-        
-        mensaje = "🧠 <b>Selección de Modelo de IA:</b>\n" + \
-                 "\n".join([f"{config['nombre']}" for ia, config in IAS_ACTIVAS.items()])
-        
-        await self._responder_o_editar(update, mensaje, InlineKeyboardMarkup(keyboard))
-
-    async def _mostrar_status(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Muestra el estado actual del bot"""
-        if not self._es_admin(update):
-            return
             
-        modos_activos = "\n".join([f"• {MODOS_DISPONIBLES[m]['nombre']}" for m in self.modos_activos])
+        reply_markup = InlineKeyboardMarkup(keyboard)
         
-        mensaje = (
-            f"📊 <b>Estado del Bot</b>\n\n"
-            f"<b>Modos activos:</b>\n{modos_activos}\n\n"
-            f"<b>IA seleccionada:</b> {IAS_DISPONIBLES[self.ia_seleccionada]['nombre']}\n"
-            f"<b>Modelo:</b> {MODEL_IA}\n\n"
-            f"<i>Última actualización: {time.strftime('%Y-%m-%d %H:%M:%S')}</i>"
-        )
+        mensaje = "🧠 Selección de Modelo de IA:"
         
-        await self._responder_o_editar(update, mensaje)
+        if update.callback_query:
+            await update.callback_query.edit_message_text(
+                text=mensaje,
+                reply_markup=reply_markup
+            )
+            await update.callback_query.answer()
+        elif update.message:
+            await update.message.reply_text(
+                text=mensaje,
+                reply_markup=reply_markup
+            )
 
     async def _manejar_callbacks(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Maneja todas las interacciones con botones inline"""
         query = update.callback_query
         await query.answer()
         
@@ -346,21 +307,17 @@ class BotManager:
         elif data == 'ia_menu':
             await self._mostrar_ia(update, context)
             
-        elif data == 'status':
-            await self._mostrar_status(update, context)
-            
         elif data == 'menu_principal':
             await self._mostrar_menu(update, context)
 
     async def _inline_query(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Maneja las consultas inline desde cualquier chat"""
         query = update.inline_query.query
         if not query.strip():
             return
             
         try:
             resultados = []
-            for modo, config in MODOS_DISPONIBLES.items():
+            for modo, nombre in MODOS_DISPONIBLES.items():
                 if modo not in self.modos_activos:
                     continue
                     
@@ -374,10 +331,9 @@ class BotManager:
                 resultados.append(
                     InlineQueryResultArticle(
                         id=str(uuid4()),
-                        title=f"{config['nombre']} ({IAS_DISPONIBLES[self.ia_seleccionada]['nombre']}): {query[:20]}...",
+                        title=f"{nombre} ({IAS_DISPONIBLES[self.ia_seleccionada]}): {query[:20]}...",
                         input_message_content=InputTextMessageContent(
-                            message_text=f"🔹 <b>{config['nombre']}</b> ({IAS_DISPONIBLES[self.ia_seleccionada]['nombre']})\n\n{respuesta}",
-                            parse_mode="HTML"
+                            message_text=f"🔹 {nombre} ({IAS_DISPONIBLES[self.ia_seleccionada]})\n\n{respuesta}"
                         ),
                         description=respuesta[:100] + ("..." if len(respuesta) > 100 else "")
                     )
@@ -394,8 +350,7 @@ class BotManager:
             await update.inline_query.answer([], cache_time=0)
 
     async def _procesar_mensaje(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Procesa mensajes de texto regulares del admin"""
-        if not self._es_admin(update):
+        if update.effective_chat and update.effective_chat.id != ADMIN_CHAT_ID:
             return
             
         texto = update.message.text
@@ -414,45 +369,18 @@ class BotManager:
             es_inline=False
         )
             
-        await update.message.reply_text(respuesta, parse_mode="HTML")
+        await update.message.reply_text(respuesta)
 
     async def _manejar_errores(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Maneja errores no capturados"""
-        error = str(context.error)
-        logger.error(f"Error no capturado: {error}")
-        
+        logger.error(f"Error: {str(context.error)}")
         if update and update.effective_message:
-            await update.effective_message.reply_text(
-                "⚠️ Ocurrió un error procesando tu solicitud. Por favor intenta nuevamente.",
-                parse_mode="HTML"
-            )
-
-    def _es_admin(self, update: Update) -> bool:
-        """Verifica si el mensaje proviene del admin"""
-        return update.effective_chat and update.effective_chat.id == ADMIN_CHAT_ID
-
-    async def _responder_o_editar(self, update: Update, texto: str, reply_markup=None):
-        """Envía o edita un mensaje según el contexto"""
-        if update.callback_query:
-            await update.callback_query.edit_message_text(
-                text=texto,
-                reply_markup=reply_markup,
-                parse_mode="HTML"
-            )
-        elif update.message:
-            await update.message.reply_text(
-                text=texto,
-                reply_markup=reply_markup,
-                parse_mode="HTML"
-            )
+            await update.effective_message.reply_text(MENSAJES["error"])
 
 async def main():
-    """Función principal para iniciar el bot"""
     bot = BotManager()
     await bot.iniciar()
 
 if __name__ == "__main__":
-    # Manejo mejorado de reinicios
     while True:
         try:
             asyncio.run(main())
