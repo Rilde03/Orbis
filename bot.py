@@ -2,7 +2,7 @@ import os
 import time
 import logging
 import asyncio
-import aiohttp
+import requests
 from uuid import uuid4
 from telegram import (
     Update,
@@ -36,10 +36,6 @@ OPENROUTER_API_KEY = os.getenv('OPENROUTER_API_KEY')
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 MODEL_IA = os.getenv('MODEL_IA', 'meta-llama/llama-3-70b-instruct')
 
-# URLs de API
-GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key={GEMINI_API_KEY}"
-OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
-
 # Configuración de modos
 MODOS_DISPONIBLES = {
     "normal": "Normal",
@@ -61,8 +57,7 @@ DATOS_INICIALES = {
 MENSAJES = {
     "acceso_denegado": "⚠️ Comando solo para administradores",
     "bienvenida": "🤖 Aiorbis Multi-Modo\nUsa /menu para ver opciones",
-    "error": "Error procesando tu solicitud",
-    "error_api": "⚠️ Error de conexión con los servicios de IA. Intenta nuevamente más tarde."
+    "error": "Error procesando tu solicitud"
 }
 
 class ServicioIA:
@@ -75,93 +70,76 @@ class ServicioIA:
             "académico": "Responde formalmente con conceptos relevantes. Cita fuentes brevemente si es necesario." + (" Máximo 300 palabras." if es_inline else "")
         }
         
-        try:
-            if ia_seleccionada == "gemini":
-                respuesta, error = await ServicioIA._generar_gemini(modo, sistemas.get(modo, ""), consulta, es_inline)
-                if not error:
-                    return respuesta, None
-                logger.warning(f"Falló Gemini: {error}. Intentando con OpenRouter...")
-            
+        if ia_seleccionada == "gemini":
+            respuesta, error = await ServicioIA._generar_gemini(modo, sistemas.get(modo, ""), consulta, es_inline)
+            if not error:
+                return respuesta, None
+            logger.warning(f"Falló Gemini, intentando con OpenRouter. Error: {error}")
             return await ServicioIA._generar_openrouter(modo, sistemas.get(modo, ""), consulta, es_inline)
-        except Exception as e:
-            logger.error(f"Error general en generación de respuesta: {str(e)}")
-            return MENSAJES["error_api"], str(e)
+        else:
+            return await ServicioIA._generar_openrouter(modo, sistemas.get(modo, ""), consulta, es_inline)
 
     @staticmethod
     async def _generar_gemini(modo, sistema, consulta, es_inline):
         try:
-            headers = {'Content-Type': 'application/json'}
-            prompt = {
-                "contents": [{
-                    "parts": [{
-                        "text": f"Eres Aiorbis. Modo: {modo}. {sistema}\nConsulta: {consulta}"
-                    }]
-                }]
+            headers = {
+                'Content-Type': 'application/json',
+                'X-goog-api-key': GEMINI_API_KEY
             }
             
-            timeout = aiohttp.ClientTimeout(total=30 if es_inline else 60)
+            prompt = f"Eres Aiorbis. Modo: {modo}. {sistema}\nConsulta: {consulta}"
+            data = {"contents": [{"parts": [{"text": prompt}]}]}
             
-            async with aiohttp.ClientSession(timeout=timeout) as session:
-                async with session.post(
-                    GEMINI_API_URL,
-                    headers=headers,
-                    json=prompt
-                ) as response:
-                    if response.status != 200:
-                        error_text = await response.text()
-                        return None, f"Error {response.status}: {error_text}"
-                    
-                    result = await response.json()
-                    return result.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", ""), None
-                    
+            timeout = 10 if es_inline else 30
+            
+            response = requests.post(
+                "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
+                headers=headers,
+                json=data,
+                timeout=timeout
+            )
+            response.raise_for_status()
+            
+            result = response.json()
+            return result["candidates"][0]["content"]["parts"][0]["text"], None
         except Exception as e:
             logger.error(f"Error en Gemini: {str(e)}")
-            return None, f"Error de conexión con Gemini: {str(e)}"
+            return f"Error de conexión con Gemini (modo {modo}).", str(e)
 
     @staticmethod
     async def _generar_openrouter(modo, sistema, consulta, es_inline):
         try:
-            headers = {
-                "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-                "HTTP-Referer": "https://telegram.org",
-                "X-Title": "Aiorbis-MultiMode",
-                "Content-Type": "application/json"
-            }
+            timeout = 10 if es_inline else 30
             
-            payload = {
-                "model": MODEL_IA,
-                "messages": [
-                    {
-                        "role": "system",
-                        "content": f"Eres Aiorbis. Modo: {modo}. {sistema}"
-                    },
-                    {
-                        "role": "user",
-                        "content": consulta
-                    }
-                ],
-                "temperature": 0.7 if modo == "gracioso" else 0.5,
-                "max_tokens": 500 if es_inline else 1500
-            }
-            
-            timeout = aiohttp.ClientTimeout(total=30 if es_inline else 60)
-            
-            async with aiohttp.ClientSession(timeout=timeout) as session:
-                async with session.post(
-                    OPENROUTER_API_URL,
-                    headers=headers,
-                    json=payload
-                ) as response:
-                    if response.status != 200:
-                        error_text = await response.text()
-                        return None, f"Error {response.status}: {error_text}"
-                    
-                    result = await response.json()
-                    return result.get("choices", [{}])[0].get("message", {}).get("content", "").strip(), None
-                    
+            response = requests.post(
+                "https://openrouter.ai/api/v1/chat/completions",
+                headers={
+                    "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+                    "HTTP-Referer": "https://telegram.org",
+                    "X-Title": "Aiorbis-MultiMode"
+                },
+                json={
+                    "model": MODEL_IA,
+                    "messages": [
+                        {
+                            "role": "system",
+                            "content": f"Eres Aiorbis. Modo: {modo}. {sistema}"
+                        },
+                        {
+                            "role": "user",
+                            "content": consulta
+                        }
+                    ],
+                    "temperature": 0.7 if modo == "gracioso" else 0.5,
+                    "max_tokens": 500 if es_inline else 1500
+                },
+                timeout=timeout
+            )
+            response.raise_for_status()
+            return response.json()["choices"][0]["message"]["content"].strip(), None
         except Exception as e:
             logger.error(f"Error en OpenRouter: {str(e)}")
-            return None, f"Error de conexión con OpenRouter: {str(e)}"
+            return f"Error procesando tu consulta en OpenRouter (modo {modo}).", str(e)
 
 class BotManager:
     def __init__(self):
@@ -171,11 +149,28 @@ class BotManager:
 
     async def iniciar(self):
         """Inicia el bot con manejo adecuado del bucle de eventos"""
-        self.application = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
-        self._configurar_handlers()
-        
-        logger.info("Bot multi-modo iniciado")
-        await self.application.run_polling()
+        try:
+            self.application = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
+            self._configurar_handlers()
+            
+            logger.info("Bot multi-modo iniciado")
+            await self.application.initialize()
+            await self.application.start()
+            await self.application.updater.start_polling()
+            
+            # Mantener el bot corriendo
+            while True:
+                await asyncio.sleep(3600)  # Espera 1 hora
+            
+        except asyncio.CancelledError:
+            pass
+        except Exception as e:
+            logger.error(f"Error en la ejecución: {e}")
+            raise
+        finally:
+            if self.application:
+                await self.application.stop()
+                await self.application.shutdown()
 
     def _configurar_handlers(self):
         dp = self.application
@@ -326,16 +321,13 @@ class BotManager:
                 if modo not in self.modos_activos:
                     continue
                     
-                respuesta, error = await ServicioIA.generar_respuesta(
+                respuesta, _ = await ServicioIA.generar_respuesta(
                     self.ia_seleccionada, 
                     modo, 
                     query,
                     es_inline=True
                 )
                 
-                if error:
-                    continue
-                    
                 resultados.append(
                     InlineQueryResultArticle(
                         id=str(uuid4()),
@@ -347,23 +339,11 @@ class BotManager:
                     )
                 )
             
-            if resultados:
-                await update.inline_query.answer(
-                    resultados,
-                    cache_time=0,
-                    is_personal=True
-                )
-            else:
-                await update.inline_query.answer(
-                    [InlineQueryResultArticle(
-                        id=str(uuid4()),
-                        title="Error al generar respuestas",
-                        input_message_content=InputTextMessageContent(
-                            message_text=MENSAJES["error_api"]
-                        )
-                    )],
-                    cache_time=0
-                )
+            await update.inline_query.answer(
+                resultados,
+                cache_time=0,
+                is_personal=True
+            )
             
         except Exception as e:
             logger.error(f"Error en inline query: {str(e)}")
@@ -382,41 +362,31 @@ class BotManager:
         
         modo_actual = next(iter(self.modos_activos), "normal")
         
-        respuesta, error = await ServicioIA.generar_respuesta(
+        respuesta, _ = await ServicioIA.generar_respuesta(
             self.ia_seleccionada,
             modo_actual,
             texto,
             es_inline=False
         )
             
-        await update.message.reply_text(respuesta if not error else MENSAJES["error_api"])
+        await update.message.reply_text(respuesta)
 
     async def _manejar_errores(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         logger.error(f"Error: {str(context.error)}")
         if update and update.effective_message:
             await update.effective_message.reply_text(MENSAJES["error"])
 
-def main():
-    """Función principal con manejo adecuado del bucle de eventos"""
+async def main():
     bot = BotManager()
-    
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    
-    try:
-        loop.run_until_complete(bot.iniciar())
-    except KeyboardInterrupt:
-        logger.info("Bot detenido manualmente")
-    except Exception as e:
-        logger.error(f"Error crítico: {e}")
-    finally:
-        loop.close()
-        logger.info("Bucle de eventos cerrado correctamente")
+    await bot.iniciar()
 
 if __name__ == "__main__":
     while True:
         try:
-            main()
+            asyncio.run(main())
+        except KeyboardInterrupt:
+            logger.info("Bot detenido manualmente")
+            break
         except Exception as e:
-            logger.error(f"Error inesperado: {e}. Reiniciando en 30 segundos...")
+            logger.error(f"Error crítico: {e}. Reiniciando en 30 segundos...")
             time.sleep(30)
