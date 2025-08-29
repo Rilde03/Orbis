@@ -5,65 +5,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cubanito SG</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #fff8f0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fff8f0 0%, #ffe6e6 100%);
       color: #333;
       max-width: 420px;
       margin: auto;
       border: 4px solid #ff3b3b;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.15);
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(255, 59, 59, 0.2);
+      overflow-x: hidden;
     }
     .container {
-      padding: 16px;
+      padding: 15px;
       text-align: center;
     }
+    .header {
+      background: linear-gradient(135deg, #ff3b3b 0%, #ff9900 100%);
+      margin: -15px -15px 15px;
+      padding: 15px;
+      border-radius: 0 0 16px 16px;
+      box-shadow: 0 4px 10px rgba(255, 59, 59, 0.3);
+    }
     h1 {
-      font-size: 2em;
-      color: #ff3b3b;
-      margin-bottom: 8px;
-      text-shadow: 1px 1px 2px #ffcfcf;
+      font-size: 1.8em;
+      color: white;
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      letter-spacing: 0.5px;
     }
     .sub {
-      font-size: 1em;
-      margin-bottom: 12px;
-      color: #444;
+      font-size: 0.9em;
+      margin: 6px 0;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 500;
     }
     .highlight {
-      background: #fff0b3;
+      background: linear-gradient(135deg, #ffdd00 0%, #ff9900 100%);
       padding: 10px;
-      border-radius: 8px;
-      font-size: 1em;
-      margin-bottom: 16px;
+      border-radius: 10px;
+      font-size: 0.95em;
+      margin-bottom: 15px;
       font-weight: bold;
-      color: #d60000;
-      box-shadow: 0 0 5px rgba(255, 200, 0, 0.3);
+      color: #9c0000;
+      box-shadow: 0 4px 8px rgba(255, 157, 0, 0.3);
+      border: 2px dashed #ff3b3b;
     }
     .productos {
-      font-size: 1.1em;
-      line-height: 1.7;
+      font-size: 0.95em;
+      line-height: 1.5;
       text-align: left;
       margin: 0 auto;
       max-width: 340px;
-      background: #fff;
-      padding: 12px;
-      border-radius: 8px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+      background: white;
+      padding: 15px;
+      border-radius: 14px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      margin-bottom: 15px;
+      border: 2px solid #ffcccc;
     }
     .productos b {
-      color: #ff3b3b;
+      background: linear-gradient(135deg, #ff3b3b 0%, #ff9900 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 700;
+      font-size: 1.05em;
     }
-    .contacto {
-      font-size: 1em;
-      margin-top: 18px;
-      color: #333;
+    .product-item {
+      padding: 5px 0;
+      border-bottom: 1px dashed #ffcccc;
+      display: flex;
+      justify-content: space-between;
+    }
+    .product-item:last-child {
+      border-bottom: none;
+    }
+    .product-name {
+      flex: 2;
+    }
+    .product-price {
+      flex: 1;
+      text-align: right;
+      font-weight: 700;
+      color: #ff3b3b;
     }
     .btn {
       display: inline-block;
-      background: linear-gradient(to right, #ff3b3b, #ff9900);
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
       color: white;
       padding: 10px 20px;
       border-radius: 30px;
@@ -71,38 +104,109 @@
       font-size: 1em;
       margin-top: 10px;
       font-weight: bold;
-      box-shadow: 0 4px 8px rgba(255, 100, 0, 0.3);
+      box-shadow: 0 6px 12px rgba(37, 211, 102, 0.4);
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
     }
     .btn:hover {
-      background: linear-gradient(to right, #e60000, #ff6600);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(37, 211, 102, 0.5);
+    }
+    .emoji {
+      font-size: 1.2em;
+      vertical-align: middle;
+    }
+    .compact-info {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      font-size: 0.9em;
+    }
+    .delivery, .payment {
+      background: white;
+      padding: 8px 12px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      flex: 0 0 48%;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Cubanito SG 🛵💨</h1>
-    <div class="sub">¡Entrega a domicilio y transferencias en CUP! 💳</div>
-    <div class="highlight">✅ Calidad garantizada al mejor precio</div>
+    <div class="header">
+      <h1>Cubanito SG <span class="emoji">🛵💨</span></h1>
+      <div class="sub">¡Entrega a domicilio y transferencias en CUP!</div>
+    </div>
+    
+    <div class="highlight">
+      <span class="emoji">✅</span> Calidad garantizada al mejor precio
+    </div>
 
     <div class="productos">
-      <b>Productos:</b><br><br>
-      🍗 Paquete de Pollo (10 lb) — <b>3,800 CUP</b><br>
-      🌭 Salchicha (3 kg) — <b>3,100 CUP</b><br>
-      🌭 Mixta (408 g | 12 uds) — <b>500 CUP</b><br>
-      🍚 Arroz (1 kg) — <b>650 CUP</b><br>
-      🫒 Aceite (900 mL) — <b>950 CUP</b><br>
-      🍝 Codito (350 g) — <b>300 CUP</b><br>
-      🍜 Fideo ADA (500 g) — <b>350 CUP</b><br>
-      🍜 Espagueti (500 g) — <b>350 CUP</b><br>
-      🧃 Jugo Frutti (3 L) — <b>40 CUP</b><br>
-      🍗 Pastillita de Pollo — <b>25 CUP</b>
+      <b>PRODUCTOS DESTACADOS</b><br>
+      
+      <div class="product-item">
+        <span class="product-name"><span class="emoji">🍗</span> Paquete de Pollo (10 lb)</span>
+        <span class="product-price">3,800 CUP</span>
+      </div>
+      
+      <div class="product-item">
+        <span class="product-name"><span class="emoji">🌭</span> Salchicha (3 kg)</span>
+        <span class="product-price">3,100 CUP</span>
+      </div>
+      
+      <div class="product-item">
+        <span class="product-name"><span class="emoji">🌭</span> Salchicha  (408 g | 12 u)</span>
+        <span class="product-price">500 CUP</span>
+      </div>
+      
+      <div class="product-item">
+        <span class="product-name"><span class="emoji">🍚</span> Arroz (1 kg)</span>
+        <span class="product-price">650 CUP</span>
+      </div>
+      
+      <div class="product-item">
+        <span class="product-name"><span class="emoji">🫒</span> Aceite (900 mL)</span>
+        <span class="product-price">950 CUP</span>
+      </div>
+      
+      <div class="product-item">
+        <span class="product-name"><span class="emoji">🍝</span> Codito (350 g)</span>
+        <span class="product-price">300 CUP</span>
+      </div>
+      
+      <div class="product-item">
+        <span class="product-name"><span class="emoji">🍜</span> Fideo ADA (500 g)</span>
+        <span class="product-price">350 CUP</span>
+      </div>
+      
+      <div class="product-item">
+        <span class="product-name"><span class="emoji">🍜</span> Espagueti (500 g)</span>
+        <span class="product-price">350 CUP</span>
+      </div>
+      
+      <div class="product-item">
+        <span class="product-name"><span class="emoji">🧃</span> Jugo Frutti (3 L)</span>
+        <span class="product-price">40 CUP</span>
+      </div>
+      
+      <div class="product-item">
+        <span class="product-name"><span class="emoji">🍗</span> Pastillita de Pollo</span>
+        <span class="product-price">25 CUP</span>
+      </div>
     </div>
 
-    <div class="contacto">
-      📦 Entrega disponible<br>
-      📲 ¡Haz tu pedido hoy mismo!<br>
-      <a href="https://wa.me/tu-numero" class="btn">Contactar por WhatsApp</a>
+    <div class="compact-info">
+      <div class="delivery">
+        <span class="emoji">📦</span> Entrega disponible
+      </div>
+      <div class="payment">
+        <span class="emoji">💳</span> Transferencias CUP
+      </div>
     </div>
+
+    <a href="https://wa.me/tu-numero" class="btn">Contactar por WhatsApp</a>
   </div>
 </body>
 </html>
