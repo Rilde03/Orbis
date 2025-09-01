@@ -1,469 +1,423 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cubanito SG - Portada</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Un Mes Contigo, Dailí</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Parisienne&display=swap');
         
+        :root {
+            --azul-oscuro: #001f3f;
+            --azul-medio: #0074e4;
+            --azul-claro: #f0f8ff;
+            --rosa-suave: #ff9ec5;
+            --rosa-intenso: #ff5c8d;
+            --rojo-corazon: #e74c3c;
+            --dorado: #ffd700;
+            --font-titulo: 'Parisienne', cursive;
+            --font-cuerpo: 'Cormorant Garamond', serif;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #0a192f 0%, #112240 50%, #1a2a6c 100%);
-            color: #fff;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 15px;
+            background: linear-gradient(135deg, var(--azul-oscuro) 0%, #000814 100%);
+            color: var(--azul-claro);
+            font-family: var(--font-cuerpo);
             overflow-x: hidden;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 500px;
-            background: rgba(17, 34, 64, 0.9);
-            border-radius: 20px;
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
-            overflow: hidden;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            padding: 20px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: containerEntrance 0.8s ease forwards;
-        }
-        
-        @keyframes containerEntrance {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        header {
             text-align: center;
-            padding: 15px 0;
-            margin-bottom: 10px;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            color: #ffd700;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            margin-bottom: 5px;
-            letter-spacing: 1.5px;
-            animation: titleGlow 3s infinite alternate;
-        }
-        
-        @keyframes titleGlow {
-            from {
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 215, 0, 0.3);
-            }
-            to {
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.7);
-            }
-        }
-        
-        .subtitle {
-            font-size: 1.1rem;
-            color: #e6f1ff;
-            margin-bottom: 10px;
-            font-weight: 500;
-            opacity: 0;
-            animation: fadeIn 0.8s ease 0.3s forwards;
-        }
-        
-        .tagline {
-            font-size: 1rem;
-            color: #ffd700;
-            font-weight: 700;
-            margin-bottom: 15px;
-            opacity: 0;
-            animation: fadeIn 0.8s ease 0.5s forwards;
-        }
-        
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-        
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .logo {
-            width: 100%;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        
-        .logo-circle {
-            width: 130px;
-            height: 130px;
-            background: radial-gradient(circle, #1a237e 0%, #283593 40%, #3949ab 100%);
-            border-radius: 50%;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-            border: 3px solid #ffd700;
-            opacity: 0;
-            transform: scale(0.8);
-            animation: logoAppear 0.8s ease 0.7s forwards;
-        }
-        
-        @keyframes logoAppear {
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-        
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #ffd700;
-            text-align: center;
-            line-height: 1.2;
-        }
-        
-        .info {
-            width: 100%;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        
-        .info h2 {
-            font-size: 1.4rem;
-            color: #ffd700;
-            margin-bottom: 10px;
-            opacity: 0;
-            animation: fadeIn 0.8s ease 0.9s forwards;
-        }
-        
-        .info p {
-            font-size: 0.9rem;
-            line-height: 1.4;
-            margin-bottom: 15px;
-            color: #e6f1ff;
-            opacity: 0;
-            animation: fadeIn 0.8s ease 1.1s forwards;
-        }
-        
-        .features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            width: 100%;
-            margin-bottom: 15px;
-        }
-        
-        .feature {
-            background: rgba(30, 58, 138, 0.7);
-            color: white;
-            border-radius: 12px;
-            padding: 15px 10px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-        }
-        
-        .feature:nth-child(1) {
-            animation: featureAppear 0.8s ease 1.3s forwards;
-        }
-        
-        .feature:nth-child(2) {
-            animation: featureAppear 0.8s ease 1.5s forwards;
-        }
-        
-        .feature:nth-child(3) {
-            animation: featureAppear 0.8s ease 1.7s forwards;
-        }
-        
-        .feature:nth-child(4) {
-            animation: featureAppear 0.8s ease 1.9s forwards;
-        }
-        
-        @keyframes featureAppear {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .feature:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), 0 0 12px rgba(255, 215, 0, 0.3);
-        }
-        
-        .feature i {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-            color: #ffd700;
-        }
-        
-        .feature-title {
-            font-weight: 700;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
-        }
-        
-        .feature p {
-            font-size: 0.75rem;
-        }
-        
-        .btn-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin: 15px 0;
-        }
-        
-        .btn-products {
-            padding: 14px 35px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, #1a237e, #283593);
-            color: #ffd700;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-            transition: all 0.3s ease;
-            opacity: 0;
-            animation: btnAppear 0.8s ease 2.1s forwards;
+            min-height: 100vh;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 95%;
+            padding: 15px;
+            background: rgba(0, 15, 35, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(255, 92, 141, 0.2);
+            border: 1px solid rgba(255, 158, 197, 0.1);
+            margin: 20px 0;
+        }
+
+        .title {
+            font-family: var(--font-titulo);
+            font-size: 3.8rem;
+            margin: 15px 0;
+            color: var(--rosa-suave);
+            text-shadow: 0 0 10px rgba(255, 158, 197, 0.5);
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        .month-badge {
+            background: linear-gradient(to right, var(--rosa-intenso), var(--rosa-suave));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            margin: 10px auto;
+            display: inline-block;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-in-out forwards;
+            animation-delay: 1.2s;
+            box-shadow: 0 0 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .photo-container {
+            position: relative;
+            width: 90%;
+            max-width: 400px;
+            margin: 25px auto;
+            perspective: 1000px;
+        }
+
+        .photo-frame {
+            position: relative;
+            width: 100%;
+            padding-top: 125%; /* Relación 4:5 para retratos */
+            border-radius: 10px;
             overflow: hidden;
+            transform-style: preserve-3d;
+            opacity: 0;
+            transform: scale(0.8) rotateY(15deg);
+            animation: photoReveal 2.5s ease-out forwards;
+            animation-delay: 1.8s;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
-        
-        @keyframes btnAppear {
-            to {
-                opacity: 1;
-            }
+
+        .photo-frame img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
         }
-        
-        .btn-products::before {
+
+        .photo-frame::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s ease;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 92, 141, 0.1) 0%, rgba(255, 158, 197, 0.2) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .message {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            margin: 25px 0;
+            padding: 0 10px;
             opacity: 0;
+            animation: fadeUp 2s ease-out forwards;
+            animation-delay: 3s;
         }
-        
-        .btn-products:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 215, 0, 0.3);
-        }
-        
-        .btn-products:hover::before {
-            animation: btnShine 1s ease;
-        }
-        
-        @keyframes btnShine {
-            0% {
-                left: -50%;
-                opacity: 0;
-            }
-            50% {
-                opacity: 0.7;
-            }
-            100% {
-                left: 100%;
-                opacity: 0;
-            }
-        }
-        
-        footer {
-            background: rgba(26, 35, 126, 0.7);
-            border-radius: 12px;
-            padding: 15px;
+
+        .message p {
+            margin: 20px 0;
             text-align: center;
-            color: white;
-            margin-top: 10px;
-            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .signature {
+            font-size: 1.4rem;
+            margin: 20px 0 10px;
+            color: var(--dorado);
+            font-family: var(--font-titulo);
             opacity: 0;
-            animation: fadeIn 0.8s ease 2.3s forwards;
+            animation: fadeIn 2s ease-in-out forwards;
+            animation-delay: 4.2s;
+        }
+
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            background-color: var(--rojo-corazon);
+            width: 16px;
+            height: 16px;
+            transform: rotate(-45deg);
+            animation: floatUp 12s linear infinite;
+            opacity: 0.8;
         }
         
-        .contact-info {
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
-        
-        .contact-info p {
-            margin-bottom: 5px;
-        }
-        
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-        
-        .social-icons a {
-            width: 35px;
-            height: 35px;
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: inherit;
             border-radius: 50%;
-            background: linear-gradient(45deg, #1a237e, #283593);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #ffd700;
-            text-decoration: none;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            transition: all 0.3s ease;
+        }
+
+        .heart::before {
+            top: -50%;
+            left: 0;
+        }
+
+        .heart::after {
+            top: 0;
+            left: 50%;
+        }
+
+        .sparkle {
+            position: absolute;
+            background-color: var(--dorado);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            animation: sparkle 3s ease-in-out infinite;
             opacity: 0;
         }
-        
-        .social-icons a:nth-child(1) {
-            animation: iconAppear 0.5s ease 2.5s forwards;
+
+        .floating-hearts {
+            position: absolute;
+            font-size: 1.8rem;
+            opacity: 0.7;
+            animation: floating 15s ease-in-out infinite;
+            color: var(--rosa-intenso);
         }
-        
-        .social-icons a:nth-child(2) {
-            animation: iconAppear 0.5s ease 2.7s forwards;
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            to { opacity: 1; }
         }
-        
-        .social-icons a:nth-child(3) {
-            animation: iconAppear 0.5s ease 2.9s forwards;
+
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
-        
-        @keyframes iconAppear {
-            to {
-                opacity: 1;
+
+        @keyframes photoReveal {
+            0% { opacity: 0; transform: scale(0.8) rotateY(15deg); }
+            100% { opacity: 1; transform: scale(1) rotateY(0); }
+        }
+
+        @keyframes floatUp {
+            0% { 
+                transform: translateY(110vh) rotate(-45deg) scale(0.3); 
+                opacity: 0; 
+            }
+            10% { 
+                opacity: 0.8; 
+            }
+            90% { 
+                opacity: 0.7; 
+            }
+            100% { 
+                transform: translateY(-30vh) rotate(-45deg) scale(0.8); 
+                opacity: 0; 
             }
         }
-        
-        .social-icons a:hover {
-            transform: translateY(-3px) scale(1.1);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4), 0 0 10px rgba(255, 215, 0, 0.3);
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
-        
-        @media (max-height: 700px) {
-            .logo-circle {
-                width: 100px;
-                height: 100px;
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(-40px) rotate(-5deg); }
+            75% { transform: translateY(-20px) rotate(3deg); }
+        }
+
+        /* Efectos de brillo para elementos románticos */
+        .romantic-glow {
+            text-shadow: 0 0 10px rgba(255, 158, 197, 0.7);
+        }
+
+        /* Media queries para móviles */
+        @media (max-width: 480px) {
+            .title {
+                font-size: 3.2rem;
+                margin: 10px 0;
             }
             
-            .logo-text {
+            .month-badge {
+                font-size: 1.1rem;
+                padding: 6px 16px;
+            }
+            
+            .message {
                 font-size: 1.2rem;
+                margin: 20px 0;
             }
             
-            h1 {
-                font-size: 2rem;
+            .signature {
+                font-size: 1.3rem;
             }
             
-            .features {
-                gap: 8px;
+            .photo-container {
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .title {
+                font-size: 2.8rem;
             }
             
-            .feature {
-                padding: 10px 5px;
+            .message {
+                font-size: 1.1rem;
+            }
+            
+            .container {
+                padding: 10px;
             }
         }
     </style>
 </head>
 <body>
+
+    <div class="hearts-container" id="hearts-container"></div>
+    
     <div class="container">
-        <header>
-            <h1>CUBANITO SG</h1>
-            <p class="subtitle">Tu solución de confianza</p>
-            <p class="tagline">¡Calidad y servicio con excelencia!</p>
-        </header>
+        <h1 class="title">Para Dailí</h1>
         
-        <div class="main-content">
-            <div class="logo">
-                <div class="logo-circle">
-                    <div class="logo-text">CUBANITO<br>SG</div>
-                </div>
-            </div>
-            
-            <div class="info">
-                <h2>¡Bienvenidos!</h2>
-                <p>Ofrecemos los mejores productos y servicios con la calidad que nos caracteriza.</p>
-                
-                <div class="features">
-                    <div class="feature">
-                        <i class="fas fa-gem"></i>
-                        <div class="feature-title">CALIDAD</div>
-                        <p>Productos excelentes</p>
-                    </div>
-                    
-                    <div class="feature">
-                        <i class="fas fa-shipping-fast"></i>
-                        <div class="feature-title">ENTREGA</div>
-                        <p>Rápido y seguro</p>
-                    </div>
-                    
-                    <div class="feature">
-                        <i class="fas fa-hand-holding-usd"></i>
-                        <div class="feature-title">PRECIOS</div>
-                        <p>Los mejores del mercado</p>
-                    </div>
-                    
-                    <div class="feature">
-                        <i class="fas fa-headset"></i>
-                        <div class="feature-title">SOPORTE</div>
-                        <p>Ayuda inmediata</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="btn-container">
-                <button class="btn-products" id="productsBtn">
-                    Ver Productos
-                </button>
+        <div class="month-badge">1 Mes Juntos</div>
+        
+        <div class="photo-container">
+            <div class="photo-frame">
+                <img src="FOTO.jpg" alt="Rilde y Dailí">
             </div>
         </div>
-        
-        <footer>
-            <div class="contact-info">
-                <p>📞 Llámanos para más información</p>
-                <p>⭐ Servicio de calidad garantizada</p>
-            </div>
-            
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-whatsapp"></i></a>
-            </div>
-        </footer>
+
+        <div class="message">
+            <p class="romantic-glow">
+                Ya un mes de novios. <br> Con esta personita que convierte cada instante en alegría.
+            </p>
+            <p class="romantic-glow">
+                Hoy es un día más que te amo, y un día más que me sigo enamorando de ti.
+            </p>
+        </div>
+
+        <div class="signature">
+            <p>Con todo mi amor, Rilde.</p>
+        </div>
     </div>
 
     <script>
-        document.getElementById('productsBtn').addEventListener('click', function() {
-            this.innerHTML = '¡Redirigiendo!';
-            this.style.background = 'linear-gradient(45deg, #283593, #3949ab)';
+        document.addEventListener('DOMContentLoaded', () => {
+            const heartsContainer = document.querySelector('.hearts-container');
             
-            setTimeout(() => {
-                // Redirección a index3.html
-                window.location.href = 'index3.html';
-            }, 1000);
+            // Crear corazones flotantes
+            function createHeart() {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                
+                // Posición aleatoria
+                heart.style.left = Math.random() * 100 + 'vw';
+                
+                // Tamaño aleatorio
+                const size = Math.random() * 8 + 8;
+                heart.style.width = size + 'px';
+                heart.style.height = size + 'px';
+                
+                // Duración aleatoria
+                const duration = Math.random() * 7 + 8;
+                heart.style.animationDuration = duration + 's';
+                
+                // Color aleatorio (tonos rojos/rosados)
+                const colors = ['#e74c3c', '#ff5c8d', '#ff9ec5', '#ff6b6b'];
+                heart.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                heartsContainer.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, duration * 1000);
+            }
+
+            // Crear destellos románticos
+            function createSparkle() {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                
+                sparkle.style.left = Math.random() * 100 + 'vw';
+                sparkle.style.top = Math.random() * 100 + 'vh';
+                
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                
+                heartsContainer.appendChild(sparkle);
+
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 3000);
+            }
+
+            // Crear corazones flotantes grandes (emojis)
+            function createFloatingHeart() {
+                const floatingHeart = document.createElement('div');
+                floatingHeart.classList.add('floating-hearts');
+                floatingHeart.innerHTML = '❤️';
+                
+                floatingHeart.style.left = Math.random() * 90 + 5 + 'vw';
+                floatingHeart.style.animationDelay = Math.random() * 5 + 's';
+                
+                document.body.appendChild(floatingHeart);
+
+                setTimeout(() => {
+                    floatingHeart.remove();
+                }, 15000);
+            }
+
+            // Iniciar animaciones
+            setInterval(createHeart, 400);
+            setInterval(createSparkle, 200);
+            setInterval(createFloatingHeart, 3000);
+            
+            // Efecto de interacción al tocar la pantalla
+            document.body.addEventListener('click', (e) => {
+                createHeartAtPosition(e.clientX, e.clientY);
+            });
+            
+            function createHeartAtPosition(x, y) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                
+                heart.style.left = (x - 8) + 'px';
+                heart.style.top = (y - 8) + 'px';
+                
+                heart.style.animationDuration = '6s';
+                
+                heartsContainer.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 6000);
+            }
         });
     </script>
+
 </body>
 </html>
