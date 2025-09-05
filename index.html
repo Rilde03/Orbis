@@ -1,423 +1,421 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Un Mes Contigo, Dailí</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Parisienne&display=swap');
-        
-        :root {
-            --azul-oscuro: #001f3f;
-            --azul-medio: #0074e4;
-            --azul-claro: #f0f8ff;
-            --rosa-suave: #ff9ec5;
-            --rosa-intenso: #ff5c8d;
-            --rojo-corazon: #e74c3c;
-            --dorado: #ffd700;
-            --font-titulo: 'Parisienne', cursive;
-            --font-cuerpo: 'Cormorant Garamond', serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, var(--azul-oscuro) 0%, #000814 100%);
-            color: var(--azul-claro);
-            font-family: var(--font-cuerpo);
-            overflow-x: hidden;
-            text-align: center;
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .container {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            max-width: 95%;
-            padding: 15px;
-            background: rgba(0, 15, 35, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 0 30px rgba(255, 92, 141, 0.2);
-            border: 1px solid rgba(255, 158, 197, 0.1);
-            margin: 20px 0;
-        }
-
-        .title {
-            font-family: var(--font-titulo);
-            font-size: 3.8rem;
-            margin: 15px 0;
-            color: var(--rosa-suave);
-            text-shadow: 0 0 10px rgba(255, 158, 197, 0.5);
-            opacity: 0;
-            animation: fadeIn 2s ease-in-out forwards;
-            animation-delay: 0.5s;
-        }
-
-        .month-badge {
-            background: linear-gradient(to right, var(--rosa-intenso), var(--rosa-suave));
-            color: white;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            margin: 10px auto;
-            display: inline-block;
-            opacity: 0;
-            animation: fadeIn 1.5s ease-in-out forwards;
-            animation-delay: 1.2s;
-            box-shadow: 0 0 15px rgba(231, 76, 60, 0.4);
-        }
-
-        .photo-container {
-            position: relative;
-            width: 90%;
-            max-width: 400px;
-            margin: 25px auto;
-            perspective: 1000px;
-        }
-
-        .photo-frame {
-            position: relative;
-            width: 100%;
-            padding-top: 125%; /* Relación 4:5 para retratos */
-            border-radius: 10px;
-            overflow: hidden;
-            transform-style: preserve-3d;
-            opacity: 0;
-            transform: scale(0.8) rotateY(15deg);
-            animation: photoReveal 2.5s ease-out forwards;
-            animation-delay: 1.8s;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .photo-frame img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-
-        .photo-frame::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(255, 92, 141, 0.1) 0%, rgba(255, 158, 197, 0.2) 100%);
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        .message {
-            font-size: 1.4rem;
-            line-height: 1.6;
-            margin: 25px 0;
-            padding: 0 10px;
-            opacity: 0;
-            animation: fadeUp 2s ease-out forwards;
-            animation-delay: 3s;
-        }
-
-        .message p {
-            margin: 20px 0;
-            text-align: center;
-        }
-
-        .signature {
-            font-size: 1.4rem;
-            margin: 20px 0 10px;
-            color: var(--dorado);
-            font-family: var(--font-titulo);
-            opacity: 0;
-            animation: fadeIn 2s ease-in-out forwards;
-            animation-delay: 4.2s;
-        }
-
-        .hearts-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .heart {
-            position: absolute;
-            background-color: var(--rojo-corazon);
-            width: 16px;
-            height: 16px;
-            transform: rotate(-45deg);
-            animation: floatUp 12s linear infinite;
-            opacity: 0.8;
-        }
-        
-        .heart::before,
-        .heart::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: inherit;
-            border-radius: 50%;
-        }
-
-        .heart::before {
-            top: -50%;
-            left: 0;
-        }
-
-        .heart::after {
-            top: 0;
-            left: 50%;
-        }
-
-        .sparkle {
-            position: absolute;
-            background-color: var(--dorado);
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            animation: sparkle 3s ease-in-out infinite;
-            opacity: 0;
-        }
-
-        .floating-hearts {
-            position: absolute;
-            font-size: 1.8rem;
-            opacity: 0.7;
-            animation: floating 15s ease-in-out infinite;
-            color: var(--rosa-intenso);
-        }
-
-        /* Animaciones */
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-
-        @keyframes fadeUp {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes photoReveal {
-            0% { opacity: 0; transform: scale(0.8) rotateY(15deg); }
-            100% { opacity: 1; transform: scale(1) rotateY(0); }
-        }
-
-        @keyframes floatUp {
-            0% { 
-                transform: translateY(110vh) rotate(-45deg) scale(0.3); 
-                opacity: 0; 
-            }
-            10% { 
-                opacity: 0.8; 
-            }
-            90% { 
-                opacity: 0.7; 
-            }
-            100% { 
-                transform: translateY(-30vh) rotate(-45deg) scale(0.8); 
-                opacity: 0; 
-            }
-        }
-
-        @keyframes sparkle {
-            0%, 100% { opacity: 0; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-
-        @keyframes floating {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-20px) rotate(5deg); }
-            50% { transform: translateY(-40px) rotate(-5deg); }
-            75% { transform: translateY(-20px) rotate(3deg); }
-        }
-
-        /* Efectos de brillo para elementos románticos */
-        .romantic-glow {
-            text-shadow: 0 0 10px rgba(255, 158, 197, 0.7);
-        }
-
-        /* Media queries para móviles */
-        @media (max-width: 480px) {
-            .title {
-                font-size: 3.2rem;
-                margin: 10px 0;
-            }
-            
-            .month-badge {
-                font-size: 1.1rem;
-                padding: 6px 16px;
-            }
-            
-            .message {
-                font-size: 1.2rem;
-                margin: 20px 0;
-            }
-            
-            .signature {
-                font-size: 1.3rem;
-            }
-            
-            .photo-container {
-                width: 95%;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .title {
-                font-size: 2.8rem;
-            }
-            
-            .message {
-                font-size: 1.1rem;
-            }
-            
-            .container {
-                padding: 10px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cubanito SG</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fff8f0 0%, #ffe6e6 100%);
+      color: #333;
+      max-width: 420px;
+      margin: auto;
+      border: 4px solid #ff3b3b;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(255, 59, 59, 0.2);
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+    .container {
+      padding: 15px;
+      text-align: center;
+    }
+    .header {
+      background: linear-gradient(135deg, #ff3b3b 0%, #ff9900 100%);
+      margin: -15px -15px 15px;
+      padding: 15px;
+      border-radius: 0 0 16px 16px;
+      box-shadow: 0 4px 10px rgba(255, 59, 59, 0.3);
+      position: relative;
+    }
+    h1 {
+      font-size: 1.8em;
+      color: white;
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      letter-spacing: 0.5px;
+    }
+    .sub {
+      font-size: 0.9em;
+      margin: 6px 0;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 500;
+    }
+    .highlight {
+      background: linear-gradient(135deg, #ffdd00 0%, #ff9900 100%);
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 0.95em;
+      margin-bottom: 15px;
+      font-weight: bold;
+      color: #9c0000;
+      box-shadow: 0 4px 8px rgba(255, 157, 0, 0.3);
+      border: 2px dashed #ff3b3b;
+    }
+    .productos {
+      font-size: 0.95em;
+      line-height: 1.5;
+      text-align: left;
+      margin: 0 auto;
+      max-width: 340px;
+      background: white;
+      padding: 15px;
+      border-radius: 14px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      margin-bottom: 15px;
+      border: 2px solid #ffcccc;
+    }
+    .productos b {
+      background: linear-gradient(135deg, #ff3b3b 0%, #ff9900 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 700;
+      font-size: 1.05em;
+    }
+    .product-item {
+      padding: 5px 0;
+      border-bottom: 1px dashed #ffcccc;
+      display: flex;
+      justify-content: space-between;
+    }
+    .product-item:last-child {
+      border-bottom: none;
+    }
+    .product-name {
+      flex: 2;
+    }
+    .product-price {
+      flex: 1;
+      text-align: right;
+      font-weight: 700;
+      color: #ff3b3b;
+    }
+    .emoji {
+      font-size: 1.2em;
+      vertical-align: middle;
+    }
+    .compact-info {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      font-size: 0.9em;
+    }
+    .delivery, .payment {
+      background: white;
+      padding: 8px 12px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      flex: 0 0 48%;
+    }
+    
+    /* Estilos para el modo edición */
+    .edit-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: white;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      font-size: 16px;
+    }
+    
+    .edit-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .edit-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    
+    .edit-form {
+      text-align: left;
+    }
+    
+    .edit-form input {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    
+    .edit-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+    
+    .edit-actions button {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    .save-btn {
+      background: #25D366;
+      color: white;
+    }
+    
+    .cancel-btn {
+      background: #ff3b3b;
+      color: white;
+    }
+    
+    .add-product-btn {
+      background: #ff9900;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    
+    .remove-btn {
+      background: #ff3b3b;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      padding: 2px 6px;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-
-    <div class="hearts-container" id="hearts-container"></div>
+  <div class="container">
+    <div class="header">
+      <h1>Cubanito SG <span class="emoji">🛵💨</span></h1>
+      <div class="sub">¡Entrega a domicilio y transferencias en CUP!</div>
+      <button class="edit-btn" onclick="openEditModal()">✏️</button>
+    </div>
     
-    <div class="container">
-        <h1 class="title">Para Dailí</h1>
-        
-        <div class="month-badge">1 Mes Juntos</div>
-        
-        <div class="photo-container">
-            <div class="photo-frame">
-                <img src="FOTO.jpg" alt="Rilde y Dailí">
-            </div>
-        </div>
-
-        <div class="message">
-            <p class="romantic-glow">
-                Ya un mes de novios. <br> Con esta personita que convierte cada instante en alegría.
-            </p>
-            <p class="romantic-glow">
-                Hoy es un día más que te amo, y un día más que me sigo enamorando de ti.
-            </p>
-        </div>
-
-        <div class="signature">
-            <p>Con todo mi amor, Rilde.</p>
-        </div>
+    <div class="highlight">
+      <span class="emoji">✅</span> Calidad garantizada al mejor precio
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const heartsContainer = document.querySelector('.hearts-container');
+    <div class="productos" id="products-container">
+      <!-- Los productos se cargarán dinámicamente con JavaScript -->
+    </div>
+
+    <div class="compact-info">
+      <div class="delivery">
+        <span class="emoji">📦</span> Entrega disponible
+      </div>
+      <div class="payment">
+        <span class="emoji">💳</span> Transferencias CUP
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de edición -->
+  <div class="edit-modal" id="editModal">
+    <div class="edit-content">
+      <h2>Modo Edición</h2>
+      <div id="login-section">
+        <p>Ingrese la contraseña para editar:</p>
+        <input type="password" id="password-input" placeholder="Contraseña">
+        <div class="edit-actions">
+          <button class="cancel-btn" onclick="closeEditModal()">Cancelar</button>
+          <button class="save-btn" onclick="checkPassword()">Acceder</button>
+        </div>
+      </div>
+      
+      <div id="edit-section" style="display: none;">
+        <h3>Editar Productos</h3>
+        <div id="edit-products-list">
+          <!-- Los productos para edición se cargarán aquí -->
+        </div>
+        <button class="add-product-btn" onclick="addNewProduct()">+ Añadir Producto</button>
+        
+        <div class="edit-actions">
+          <button class="cancel-btn" onclick="closeEditModal()">Cancelar</button>
+          <button class="save-btn" onclick="saveChanges()">Guardar Cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Datos de productos (se cargarán desde localStorage si existen)
+    let products = [
+      { name: "Paquete de Pollo (10 lb)", price: "3,800", emoji: "🍗" },
+      { name: "Salchicha (3 kg)", price: "3,100", emoji: "🌭" },
+      { name: "Salchicha (10 unidades)", price: "450", emoji: "🌭" },
+      { name: "Arroz (1 kg)", price: "650", emoji: "🍚" },
+      { name: "Aceite (900 mL)", price: "950", emoji: "🫒" },
+      { name: "Codito (350 g)", price: "300", emoji: "🍝" },
+      { name: "Fideo ADA (500 g)", price: "350", emoji: "🍜" },
+      { name: "Espagueti (500 g)", price: "350", emoji: "🍜" },
+      { name: "Jugo Frutti (3 L)", price: "40", emoji: "🧃" },
+      { name: "Pastillita de Pollo", price: "25", emoji: "🍗" },
+      { name: "Frijoles Negros (1 kg)", price: "850", emoji: "🫘" },
+      { name: "Pasta de Tomate", price: "500", emoji: "🍅" }
+    ];
+
+    // Contraseña para edición
+    const EDIT_PASSWORD = "red123";
+
+    // Cargar productos desde localStorage si existen
+    function loadProducts() {
+      const savedProducts = localStorage.getItem('cubanitoProducts');
+      if (savedProducts) {
+        products = JSON.parse(savedProducts);
+      }
+      renderProducts();
+    }
+
+    // Guardar productos en localStorage
+    function saveProducts() {
+      localStorage.setItem('cubanitoProducts', JSON.stringify(products));
+    }
+
+    // Renderizar productos en la página
+    function renderProducts() {
+      const container = document.getElementById('products-container');
+      container.innerHTML = '<b>PRODUCTOS DESTACADOS</b><br>';
+      
+      products.forEach(product => {
+        const productElement = document.createElement('div');
+        productElement.className = 'product-item';
+        productElement.innerHTML = `
+          <span class="product-name"><span class="emoji">${product.emoji}</span> ${product.name}</span>
+          <span class="product-price">${product.price} CUP</span>
+        `;
+        container.appendChild(productElement);
+      });
+    }
+
+    // Abrir modal de edición
+    function openEditModal() {
+      document.getElementById('editModal').style.display = 'flex';
+      document.getElementById('login-section').style.display = 'block';
+      document.getElementById('edit-section').style.display = 'none';
+      document.getElementById('password-input').value = '';
+    }
+
+    // Cerrar modal de edición
+    function closeEditModal() {
+      document.getElementById('editModal').style.display = 'none';
+    }
+
+    // Verificar contraseña
+    function checkPassword() {
+      const password = document.getElementById('password-input').value;
+      if (password === EDIT_PASSWORD) {
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('edit-section').style.display = 'block';
+        renderEditProducts();
+      } else {
+        alert('Contraseña incorrecta');
+      }
+    }
+
+    // Renderizar productos para edición
+    function renderEditProducts() {
+      const container = document.getElementById('edit-products-list');
+      container.innerHTML = '';
+      
+      products.forEach((product, index) => {
+        const productElement = document.createElement('div');
+        productElement.className = 'edit-product-item';
+        productElement.innerHTML = `
+          <div class="edit-form">
+            <label>Emoji:</label>
+            <input type="text" value="${product.emoji}" onchange="updateProductEmoji(${index}, this.value)">
             
-            // Crear corazones flotantes
-            function createHeart() {
-                const heart = document.createElement('div');
-                heart.classList.add('heart');
-                
-                // Posición aleatoria
-                heart.style.left = Math.random() * 100 + 'vw';
-                
-                // Tamaño aleatorio
-                const size = Math.random() * 8 + 8;
-                heart.style.width = size + 'px';
-                heart.style.height = size + 'px';
-                
-                // Duración aleatoria
-                const duration = Math.random() * 7 + 8;
-                heart.style.animationDuration = duration + 's';
-                
-                // Color aleatorio (tonos rojos/rosados)
-                const colors = ['#e74c3c', '#ff5c8d', '#ff9ec5', '#ff6b6b'];
-                heart.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                
-                heartsContainer.appendChild(heart);
-
-                setTimeout(() => {
-                    heart.remove();
-                }, duration * 1000);
-            }
-
-            // Crear destellos románticos
-            function createSparkle() {
-                const sparkle = document.createElement('div');
-                sparkle.classList.add('sparkle');
-                
-                sparkle.style.left = Math.random() * 100 + 'vw';
-                sparkle.style.top = Math.random() * 100 + 'vh';
-                
-                sparkle.style.animationDelay = Math.random() * 2 + 's';
-                
-                heartsContainer.appendChild(sparkle);
-
-                setTimeout(() => {
-                    sparkle.remove();
-                }, 3000);
-            }
-
-            // Crear corazones flotantes grandes (emojis)
-            function createFloatingHeart() {
-                const floatingHeart = document.createElement('div');
-                floatingHeart.classList.add('floating-hearts');
-                floatingHeart.innerHTML = '❤️';
-                
-                floatingHeart.style.left = Math.random() * 90 + 5 + 'vw';
-                floatingHeart.style.animationDelay = Math.random() * 5 + 's';
-                
-                document.body.appendChild(floatingHeart);
-
-                setTimeout(() => {
-                    floatingHeart.remove();
-                }, 15000);
-            }
-
-            // Iniciar animaciones
-            setInterval(createHeart, 400);
-            setInterval(createSparkle, 200);
-            setInterval(createFloatingHeart, 3000);
+            <label>Nombre del Producto:</label>
+            <input type="text" value="${product.name}" onchange="updateProductName(${index}, this.value)">
             
-            // Efecto de interacción al tocar la pantalla
-            document.body.addEventListener('click', (e) => {
-                createHeartAtPosition(e.clientX, e.clientY);
-            });
+            <label>Precio (CUP):</label>
+            <input type="text" value="${product.price}" onchange="updateProductPrice(${index}, this.value)">
             
-            function createHeartAtPosition(x, y) {
-                const heart = document.createElement('div');
-                heart.classList.add('heart');
-                
-                heart.style.left = (x - 8) + 'px';
-                heart.style.top = (y - 8) + 'px';
-                
-                heart.style.animationDuration = '6s';
-                
-                heartsContainer.appendChild(heart);
+            <button class="remove-btn" onclick="removeProduct(${index})">Eliminar</button>
+          </div>
+        `;
+        container.appendChild(productElement);
+      });
+    }
 
-                setTimeout(() => {
-                    heart.remove();
-                }, 6000);
-            }
-        });
-    </script>
+    // Actualizar emoji de producto
+    function updateProductEmoji(index, value) {
+      products[index].emoji = value;
+    }
 
+    // Actualizar nombre de producto
+    function updateProductName(index, value) {
+      products[index].name = value;
+    }
+
+    // Actualizar precio de producto
+    function updateProductPrice(index, value) {
+      products[index].price = value;
+    }
+
+    // Eliminar producto
+    function removeProduct(index) {
+      if (confirm('¿Estás seguro de que quieres eliminar este producto?')) {
+        products.splice(index, 1);
+        renderEditProducts();
+      }
+    }
+
+    // Añadir nuevo producto
+    function addNewProduct() {
+      products.push({
+        name: "Nuevo Producto",
+        price: "0",
+        emoji: "📦"
+      });
+      renderEditProducts();
+    }
+
+    // Guardar cambios
+    function saveChanges() {
+      saveProducts();
+      renderProducts();
+      closeEditModal();
+      alert('Cambios guardados correctamente');
+    }
+
+    // Inicializar la página
+    document.addEventListener('DOMContentLoaded', function() {
+      loadProducts();
+    });
+
+    // Cerrar modal al hacer clic fuera del contenido
+    document.getElementById('editModal').addEventListener('click', function(e) {
+      if (e.target === document.getElementById('editModal')) {
+        closeEditModal();
+      }
+    });
+  </script>
 </body>
 </html>
